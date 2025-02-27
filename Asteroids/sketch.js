@@ -7,5 +7,6 @@ function setup() {
 
 function draw() {
   background(10);
+  player.detectInput();
   player.display();
 }

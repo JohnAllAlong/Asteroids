@@ -2,7 +2,8 @@ class PlayerShip {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.rotationSpeed = 0.1
+    this.rotationSpeed = 0.1;
+    this.angle = 0;
   }
 
   display() {
@@ -10,9 +11,8 @@ class PlayerShip {
   }
 
   drawShip() {
-
     translate(this.x, this.y);
-    rotate(2)
+    rotate(this.angle);
     fill("blue");
     strokeWeight(2);
     stroke("gold");
@@ -24,10 +24,22 @@ class PlayerShip {
     vertex(5, 15);
     vertex(15, 15);
     endShape(CLOSE);
-    fill('red')
-    circle(0,0, 1)
+    fill("red");
+    circle(0, 0, 1);
   }
 
   drawLeftThruster() {}
-  updateRotation(rotation){}
+
+  detectInput() {
+    if (keyIsDown(LEFT_ARROW)) {
+      this.updateRotation(-1);
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.updateRotation(1);
+    }
+  }
+
+  updateRotation(input) {
+    this.angle = this.angle + input * this.rotationSpeed;
+  }
 }
