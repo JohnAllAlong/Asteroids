@@ -3,7 +3,9 @@ class Projectile {
     this.spawnPos = position.copy();
     this.forceDirection = direction.copy();
     this.speedMult = speed;
-    
+    this.lifetime = 2;
+    this.currentTime = 0;
+    this.isDead = false;
   }
 
   display() {
@@ -12,7 +14,11 @@ class Projectile {
   }
 
   update() {
-    this.force = p5.Vector.mult(this.forceDirection, this.speedMult)
-    this.spawnPos.add(this.force)
+    this.force = p5.Vector.mult(this.forceDirection, this.speedMult);
+    this.spawnPos.add(this.force);
+    this.currentTime += millis() / 1000 / frameCount;
+    if (this.currentTime >= this.lifetime) {
+      this.isDead = true;
+    }
   }
 }

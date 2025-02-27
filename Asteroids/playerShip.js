@@ -9,21 +9,31 @@ class PlayerShip {
     this.target = createVector(0, 0);
     this.velocity = createVector(0, 0);
     this.isEngineActive = false;
-    this.canFire = true;
+    this.maxBullets = 10;
+    this.currentBullets = 0;
+    this.bullets = [];
   }
 
   display() {
     this.drawShip();
-    if (this.bullet != null) {
-      this.bullet.display();
+    if (this.bullets.length != 0) {
+      for (let i = 0; i < this.bullets.length; ++i) {
+        this.bullets[i].display();
+      }
     }
   }
 
   update() {
     this.updatePosition();
     this.detectInput();
-    if (this.bullet != null) {
-      this.bullet.update();
+    if (this.bullets.length != 0) {
+      for (let j = 0; j < this.bullets.length; ++j) {
+        this.bullets[j].update();
+        if (this.bullets[j].isDead) {
+          this.bullets.splice(this.bullets[j], 1);
+          this.currentBullets--
+        }
+      }
     }
   }
 
@@ -64,6 +74,9 @@ class PlayerShip {
     }
     if (keyIsDown("32")) {
       this.fireProjectile();
+      this.canFire = false;
+    } else {
+      this.canFire = true;
     }
   }
 
@@ -84,13 +97,13 @@ class PlayerShip {
     }
     this.position.add(this.velocity);
     this.velocity.mult(0.98);
-    //this.target.set(0, 0);
   }
 
   fireProjectile() {
-    if (this.canFire) {
-      this.bullet = new Projectile(this.position, this.target, 30);
-      this.canFire = false;
+    if (this.currentBullets < this.maxBullets && this.canFire) {
+      this.bullet = new Projectile(this.position, this.target, 5);
+      this.bullets.push(this.bullet);
+      this.currentBullets++;
     }
     //Set up a reference to the projectile class above, then spawn a projectile here
   }

@@ -11,7 +11,6 @@ function draw() {
   player.update();
   player.display();
   if (player.bullet != null) {
-    console.log(player.bullet.spawnPos.x);
-    console.log(player.bullet.spawnPos.y);
+    console.log(player.currentBullets);
   }
 }
