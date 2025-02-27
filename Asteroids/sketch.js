@@ -1,7 +1,11 @@
+let player;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  player = new PlayerShip(windowWidth / 2, windowHeight / 2);
 }
 
 function draw() {
-  circle(mouseX, mouseY, 20);
+  background(10);
+  player.display();
 }
