@@ -31,7 +31,7 @@ class PlayerShip {
         this.bullets[j].update();
         if (this.bullets[j].isDead) {
           this.bullets.splice(this.bullets[j], 1);
-          this.currentBullets--
+          this.currentBullets--;
         }
       }
     }
@@ -58,13 +58,11 @@ class PlayerShip {
     pop();
   }
 
-  drawLeftThruster() {}
-
   detectInput() {
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown('65')) {
       this.updateRotation(-1);
     }
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown('68')) {
       this.updateRotation(1);
     }
     if (keyIsDown(UP_ARROW)) {
@@ -101,7 +99,9 @@ class PlayerShip {
 
   fireProjectile() {
     if (this.currentBullets < this.maxBullets && this.canFire) {
-      this.bullet = new Projectile(this.position, this.target, 5);
+      this.velocity.sub(p5.Vector.mult(this.target, 5));
+      this.position.add(this.velocity);
+      this.bullet = new Projectile(this.position, this.target, 40);
       this.bullets.push(this.bullet);
       this.currentBullets++;
     }
