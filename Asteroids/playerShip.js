@@ -8,16 +8,23 @@ class PlayerShip {
     this.position = createVector(this.x, this.y);
     this.target = createVector(0, 0);
     this.velocity = createVector(0, 0);
-    this.activeEngine = 0;
+    this.isEngineActive = false;
+    this.canFire = true;
   }
 
   display() {
     this.drawShip();
+    if (this.bullet != null) {
+      this.bullet.display();
+    }
   }
 
   update() {
-    this.detectInput();
     this.updatePosition();
+    this.detectInput();
+    if (this.bullet != null) {
+      this.bullet.update();
+    }
   }
 
   drawShip() {
@@ -51,9 +58,12 @@ class PlayerShip {
       this.updateRotation(1);
     }
     if (keyIsDown(UP_ARROW)) {
-      this.activeEngine = 1;
+      this.isEngineActive = true;
     } else {
-      this.activeEngine = 0;
+      this.isEngineActive = false;
+    }
+    if (keyIsDown("32")) {
+      this.fireProjectile();
     }
   }
 
@@ -67,13 +77,21 @@ class PlayerShip {
   }
 
   updatePosition() {
-    this.target.x =
-      cos(this.angle - HALF_PI) * this.activeEngine * this.movementSpeed;
-    this.target.y =
-      sin(this.angle - HALF_PI) * this.activeEngine * this.movementSpeed;
-    this.velocity.add(this.target);
+    this.target.x = cos(this.angle - HALF_PI) * this.movementSpeed;
+    this.target.y = sin(this.angle - HALF_PI) * this.movementSpeed;
+    if (this.isEngineActive) {
+      this.velocity.add(this.target);
+    }
     this.position.add(this.velocity);
-    this.velocity.mult(0.99);
-    this.target.set(0, 0);
+    this.velocity.mult(0.98);
+    //this.target.set(0, 0);
+  }
+
+  fireProjectile() {
+    if (this.canFire) {
+      this.bullet = new Projectile(this.position, this.target, 30);
+      this.canFire = false;
+    }
+    //Set up a reference to the projectile class above, then spawn a projectile here
   }
 }

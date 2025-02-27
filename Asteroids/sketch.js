@@ -10,6 +10,8 @@ function draw() {
   frameRate(60);
   player.update();
   player.display();
-  console.log("Target: " + player.target);
-  console.log("Position: " + player.position);
+  if (player.bullet != null) {
+    console.log(player.bullet.spawnPos.x);
+    console.log(player.bullet.spawnPos.y);
+  }
 }
