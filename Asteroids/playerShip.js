@@ -2,8 +2,10 @@ class PlayerShip {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.rotationSpeed = 0.1;
+    this.rotationSpeed = 0.05;
+    this.movementSpeed = 0.1;
     this.angle = 0;
+    this.position = createVector(this.x, this.y);
   }
 
   display() {
@@ -12,7 +14,7 @@ class PlayerShip {
 
   drawShip() {
     push();
-    translate(this.x, this.y);
+    translate(this.position.x, this.position.y);
     rotate(this.angle);
     fill("blue");
     strokeWeight(2);
@@ -40,9 +42,19 @@ class PlayerShip {
     if (keyIsDown(RIGHT_ARROW)) {
       this.updateRotation(1);
     }
+    if (keyIsDown("32")) {
+      this.updatePosition(1);
+    }
   }
 
   updateRotation(input) {
     this.angle = this.angle + input * this.rotationSpeed;
+    if (this.angle < -PI) {
+      this.angle = PI;
+    } else if (this.angle > PI) {
+      this.angle = -PI;
+    }
   }
+
+  updatePosition(input) {}
 }

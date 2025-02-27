@@ -9,4 +9,5 @@ function draw() {
   background(10);
   player.detectInput();
   player.display();
+  console.log(player.angle);
 }
