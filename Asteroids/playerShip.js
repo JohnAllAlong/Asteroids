@@ -11,21 +11,24 @@ class PlayerShip {
   }
 
   drawShip() {
+    push();
     translate(this.x, this.y);
     rotate(this.angle);
     fill("blue");
     strokeWeight(2);
     stroke("gold");
     beginShape();
-    vertex(0, -15);
-    vertex(-15, 15);
-    vertex(-5, 15);
-    vertex(0, 8);
-    vertex(5, 15);
-    vertex(15, 15);
+    vertex(0, -20);
+    vertex(-15, 10);
+    vertex(-5, 10);
+    vertex(0, 3);
+    vertex(5, 10);
+    vertex(15, 10);
     endShape(CLOSE);
+    noStroke();
     fill("red");
-    circle(0, 0, 1);
+    circle(0, 0, 3);
+    pop();
   }
 
   drawLeftThruster() {}
