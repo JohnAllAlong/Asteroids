@@ -7,7 +7,9 @@ function setup() {
 
 function draw() {
   background(10);
-  player.detectInput();
+  frameRate(60);
+  player.update();
   player.display();
-  console.log(player.angle);
+  console.log("Target: " + player.target);
+  console.log("Position: " + player.position);
 }

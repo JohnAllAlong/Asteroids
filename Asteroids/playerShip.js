@@ -2,14 +2,22 @@ class PlayerShip {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.rotationSpeed = 0.05;
+    this.rotationSpeed = 0.1;
     this.movementSpeed = 0.1;
     this.angle = 0;
     this.position = createVector(this.x, this.y);
+    this.target = createVector(0, 0);
+    this.velocity = createVector(0, 0);
+    this.activeEngine = 0;
   }
 
   display() {
     this.drawShip();
+  }
+
+  update() {
+    this.detectInput();
+    this.updatePosition();
   }
 
   drawShip() {
@@ -42,8 +50,10 @@ class PlayerShip {
     if (keyIsDown(RIGHT_ARROW)) {
       this.updateRotation(1);
     }
-    if (keyIsDown("32")) {
-      this.updatePosition(1);
+    if (keyIsDown(UP_ARROW)) {
+      this.activeEngine = 1;
+    } else {
+      this.activeEngine = 0;
     }
   }
 
@@ -56,5 +66,14 @@ class PlayerShip {
     }
   }
 
-  updatePosition(input) {}
+  updatePosition() {
+    this.target.x =
+      cos(this.angle - HALF_PI) * this.activeEngine * this.movementSpeed;
+    this.target.y =
+      sin(this.angle - HALF_PI) * this.activeEngine * this.movementSpeed;
+    this.velocity.add(this.target);
+    this.position.add(this.velocity);
+    this.velocity.mult(0.99);
+    this.target.set(0, 0);
+  }
 }
