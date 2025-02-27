@@ -59,10 +59,10 @@ class PlayerShip {
   }
 
   detectInput() {
-    if (keyIsDown('65')) {
+    if (keyIsDown("65")) {
       this.updateRotation(-1);
     }
-    if (keyIsDown('68')) {
+    if (keyIsDown("68")) {
       this.updateRotation(1);
     }
     if (keyIsDown(UP_ARROW)) {
@@ -95,6 +95,9 @@ class PlayerShip {
     }
     this.position.add(this.velocity);
     this.velocity.mult(0.98);
+    if(this.velocity.mag() <= 0.09){
+        this.velocity.set(0,0)
+    }
   }
 
   fireProjectile() {
@@ -105,6 +108,5 @@ class PlayerShip {
       this.bullets.push(this.bullet);
       this.currentBullets++;
     }
-    //Set up a reference to the projectile class above, then spawn a projectile here
   }
 }
