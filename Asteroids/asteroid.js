@@ -7,7 +7,6 @@ constructor(position, heading, size){
     this.base = 70
     this.size = this.base / size
     this.speedMult = size / 2
-    this.speed = 1
     this.velocity = createVector(0,0)
 }
 
@@ -19,9 +18,8 @@ circle(this.startPos.x, this.startPos.y, this.size)
 
 update(){
 
-
-this.velocity.x += cos(this.heading - HALF_PI) * this.speed * this.speedMult
-this.velocity.y += sin(this.heading - HALF_PI) * this.speed * this.speedMult
+this.velocity.x += cos(this.heading - HALF_PI) * this.speedMult
+this.velocity.y += sin(this.heading - HALF_PI) * this.speedMult
 
 this.startPos.add(this.velocity)
 this.velocity = createVector(0, 0)
