@@ -23,7 +23,7 @@ function draw() {
 
     heading = random(0, TWO_PI)
     startDirection = createVector(random(0, windowWidth), random(0, windowHeight))
-    asteroid = new Asteroid(startDirection, heading, 3)
+    asteroid = new Asteroid(startDirection, heading, 1)
     asteroids.push(asteroid)
     currentNum++
   }
