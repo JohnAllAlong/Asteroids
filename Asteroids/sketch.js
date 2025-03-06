@@ -1,3 +1,8 @@
+//CONTROLS//
+//A AND D TO ROTATE
+//UP ARROW TO FIRE ENGINE
+//SPACEBAR TO SHOOT
+
 let player;
 let asteroid;
 let asteroids = [];
