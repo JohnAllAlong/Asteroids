@@ -20,7 +20,7 @@ function setup() {
 
 function draw() {
   background(10);
-  frameRate(1);
+  frameRate(60);
   
   player.update();
   player.display();
@@ -65,6 +65,9 @@ function destroyAsteroids(){
         heading = random(0, TWO_PI)
         let pozish = asteroids[0].startPos.copy()
         
+        if(asteroids[0].sizeMult >= 3){
+          asteroids.splice(asteroids[0], 1)
+        }
           asteroid = new Asteroid(pozish, heading, asteroids[0].sizeMult + 1)
           asteroids.push(asteroid)
           console.log(asteroids[0].sizeMult)
@@ -72,7 +75,7 @@ function destroyAsteroids(){
       }
       asteroids.splice(asteroids[0], 1)
       
-      //console.log(asteroids.length)
     }
+    currentNum = asteroids.length
     
 }

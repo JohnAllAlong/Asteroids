@@ -7,7 +7,7 @@ constructor(position, heading, sizeMult){
     this.base = 70
     this.sizeMult = sizeMult
     this.size = this.base / this.sizeMult
-    this.speedMult = this.size / this.base
+    this.speedMult = this.base / this.size 
     this.velocity = createVector(0,0)
 }
 
