@@ -1,16 +1,18 @@
 class Asteroid{
 
-constructor(position, heading, size){
+constructor(position, heading, sizeMult){
 
     this.startPos = position
     this.heading = heading
     this.base = 70
-    this.size = this.base / size
-    this.speedMult = size / 2
+    this.sizeMult = sizeMult
+    this.size = this.base / this.sizeMult
+    this.speedMult = this.size / this.base
     this.velocity = createVector(0,0)
 }
 
 display(){
+    noStroke()
 fill('red')
 circle(this.startPos.x, this.startPos.y, this.size)
 

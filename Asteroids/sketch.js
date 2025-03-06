@@ -20,7 +20,7 @@ function setup() {
 
 function draw() {
   background(10);
-  frameRate(10);
+  frameRate(1);
   
   player.update();
   player.display();
@@ -54,7 +54,7 @@ function spawnAsteroids(){
     asteroid = new Asteroid(startPosition, heading, 1)
     asteroids.push(asteroid)
     currentNum++
-    console.log(asteroids.length)
+    //console.log(asteroids.length)
   }
 }
 
@@ -63,15 +63,16 @@ function destroyAsteroids(){
     for(let m = 0; m < currentNum; ++m){
       for(let n = 0; n < children; ++n){
         heading = random(0, TWO_PI)
-        ya = asteroids[m];
-        let pozish = ya.startPos.copy()
+        let pozish = asteroids[0].startPos.copy()
         
-          asteroid = new Asteroid(pozish, heading, ya.size + 1)
+          asteroid = new Asteroid(pozish, heading, asteroids[0].sizeMult + 1)
           asteroids.push(asteroid)
+          console.log(asteroids[0].sizeMult)
         
       }
-      asteroids.splice(ya, 1)
+      asteroids.splice(asteroids[0], 1)
       
-      console.log(m)
+      //console.log(asteroids.length)
     }
+    
 }
