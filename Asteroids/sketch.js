@@ -13,69 +13,75 @@ let children = 2;
 let heading = 0;
 let startPosition
 
+let spawner;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   player = new PlayerShip(windowWidth / 2, windowHeight / 2);  
+  spawner = new Spawner()
+  spawner.spawnAsteroids()
 }
 
 function draw() {
   background(10);
   frameRate(60);
   
+
+  
+  
   player.update();
   player.display();
-  if (player.bullet != null) {
-    
+  detectInput()
+
+  
+
+  if(spawner.projectiles.length != 0){
+    for(let k = 0; k < spawner.projectiles.length; ++k){
+    spawner.projectiles[k].display()
+    spawner.projectiles[k].update()
+    console.log(spawner.projectiles.length)
+    }
   }
 
-  if(asteroids.length != 0){
-  for(let j = 0; j < asteroids.length; ++j){
-    asteroids[j].display()
-    asteroids[j].update()
+  if(spawner.asteroids.length != 0){
+  for(let j = 0; j < spawner.asteroids.length; ++j){
+    spawner.asteroids[j].display()
+    spawner.asteroids[j].update()
   }
 }
-  //console.log(ya)
+ 
 }
 
 function keyPressed(){
   if(key === 'j'){
-  spawnAsteroids()
+    spawner.spawnAsteroids()
   }
   if(key === 'k'){
-    destroyAsteroids()
-  }
+  spawner.destroyAsteroid(0)
+}
 }
 
-function spawnAsteroids(){
-  for(let i = currentNum; i < startNum; ++i){
-
-    heading = random(0, TWO_PI)
-    startPosition = createVector(random(0, windowWidth), random(0, windowHeight))
-    asteroid = new Asteroid(startPosition, heading, 1)
-    asteroids.push(asteroid)
-    currentNum++
-    //console.log(asteroids.length)
+function detectInput() {
+  if(player != null){
+  if (keyIsDown("65")) {
+    player.updateRotation(-1);
   }
-}
-
-function destroyAsteroids(){
-
-    for(let m = 0; m < currentNum; ++m){
-      for(let n = 0; n < children; ++n){
-        heading = random(0, TWO_PI)
-        let pozish = asteroids[0].startPos.copy()
-        
-        if(asteroids[0].sizeMult >= 3){
-          asteroids.splice(asteroids[0], 1)
-        }
-          asteroid = new Asteroid(pozish, heading, asteroids[0].sizeMult + 1)
-          asteroids.push(asteroid)
-          console.log(asteroids[0].sizeMult)
-        
-      }
-      asteroids.splice(asteroids[0], 1)
-      
+  if (keyIsDown("68")) {
+    player.updateRotation(1);
+  }
+  if (keyIsDown(UP_ARROW)) {
+    player.isEngineActive = true;
+  } else {
+    player.isEngineActive = false;
+  }
+  if (keyIsDown("32")) {
+    player.getBulletInfo();
+    if (player.currentBullets < player.maxBullets && player.canFire){
+    spawner.spawnProjectile(player.position, player.target, 40)
     }
-    currentNum = asteroids.length
-    
+    player.canFire = false;
+  } else {
+    player.canFire = true;
+  }
+}
 }

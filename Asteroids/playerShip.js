@@ -12,20 +12,21 @@ class PlayerShip {
     this.maxBullets = 10;
     this.currentBullets = 0;
     this.bullets = [];
+  
   }
 
   display() {
     this.drawShip();
-    if (this.bullets.length != 0) {
+    /*if (this.bullets.length != 0) {
       for (let i = 0; i < this.bullets.length; ++i) {
         this.bullets[i].display();
       }
-    }
+    }*/
   }
 
   update() {
     this.updatePosition();
-    this.detectInput();
+    /*this.detectInput();
     if (this.bullets.length != 0) {
       for (let j = 0; j < this.bullets.length; ++j) {
         this.bullets[j].update();
@@ -34,7 +35,7 @@ class PlayerShip {
           this.currentBullets--;
         }
       }
-    }
+    }*/
   }
 
   drawShip() {
@@ -58,7 +59,7 @@ class PlayerShip {
     pop();
   }
 
-  detectInput() {
+  /*detectInput() {
     if (keyIsDown("65")) {
       this.updateRotation(-1);
     }
@@ -76,7 +77,7 @@ class PlayerShip {
     } else {
       this.canFire = true;
     }
-  }
+  }*/
 
   updateRotation(input) {
     this.angle = this.angle + input * this.rotationSpeed;
@@ -100,13 +101,10 @@ class PlayerShip {
     }
   }
 
-  fireProjectile() {
+  getBulletInfo() {
     if (this.currentBullets < this.maxBullets && this.canFire) {
       this.velocity.sub(p5.Vector.mult(this.target, 5));
       this.position.add(this.velocity);
-      this.bullet = new Projectile(this.position, this.target, 40);
-      this.bullets.push(this.bullet);
-      this.currentBullets++;
     }
   }
 }

@@ -9,6 +9,7 @@ class Projectile {
   }
 
   display() {
+    noStroke()
     fill("green");
     circle(this.spawnPos.x, this.spawnPos.y, 10);
   }
