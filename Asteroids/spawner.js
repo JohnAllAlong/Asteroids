@@ -26,7 +26,7 @@ class Spawner {
       }
       for (let j = 0; j < 2; ++j) {
         this.heading = random(0, TWO_PI);
-        this.pozish = this.asteroids[index].startPos.copy();
+        this.pozish = this.asteroids[index].position.copy();
         this.asteroid = new Asteroid(
           this.pozish,
           this.heading,

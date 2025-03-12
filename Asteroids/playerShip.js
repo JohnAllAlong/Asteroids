@@ -9,7 +9,7 @@ class PlayerShip {
     this.target = createVector(0, 0);
     this.velocity = createVector(0, 0);
     this.isEngineActive = false;
-    this.maxBullets = 10;
+    this.maxBullets = 5;
     this.currentBullets = 0;
     this.bullets = [];
   

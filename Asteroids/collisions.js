@@ -10,7 +10,7 @@ class Collisions {
   checkAsteroidsAndProjectiles() {
     if (this.a.length != 0) {
       for (let i = 0; i < this.a.length; ++i) {
-        this.aLocation = this.a[i].startPos;
+        this.aLocation = this.a[i].position;
         this.aRad = this.a[i].size / 2;
         if (this.p.length != 0) {
           for (let j = 0; j < this.p.length; ++j) {
