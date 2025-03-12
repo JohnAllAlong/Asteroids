@@ -6,12 +6,13 @@ class Projectile {
     this.lifetime = 2;
     this.currentTime = 0;
     this.isDead = false;
+    this.size = 10;
   }
 
   display() {
-    noStroke()
+    noStroke();
     fill("green");
-    circle(this.spawnPos.x, this.spawnPos.y, 10);
+    circle(this.spawnPos.x, this.spawnPos.y, this.size);
   }
 
   update() {

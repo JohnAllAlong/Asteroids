@@ -1,7 +1,8 @@
 class Spawner {
-  constructor() {
+  constructor(world) {
+    this.world = world;
     this.asteroids = [];
-    this.startNum = 5;
+    this.startNum = 1;
     this.projectiles = [];
   }
 
@@ -14,7 +15,6 @@ class Spawner {
       );
       this.asteroid = new Asteroid(this.startPosition, this.heading, 1);
       this.asteroids.push(this.asteroid);
-      //console.log(asteroids.length)
     }
   }
 
