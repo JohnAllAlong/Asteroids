@@ -3,15 +3,11 @@
 //UP ARROW TO FIRE ENGINE
 //SPACEBAR TO SHOOT
 
-let spawner;
 let player;
 let world;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //spawner = new Spawner();
-  //spawner.spawnPlayerShip();
-  //spawner.spawnAsteroids();
   world = new World();
   world.start();
   player = world.spawner.player;
@@ -23,7 +19,7 @@ function draw() {
   world.update();
   world.display();
   detectInput();
-  console.log(world.spawner.asteroids.length);
+  console.log("From Collisions" + world.spawner.goob);
 }
 
 function keyPressed() {

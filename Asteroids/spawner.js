@@ -19,7 +19,7 @@ class Spawner {
   }
 
   destroyAsteroid(index) {
-    for (let k = 0; k < 1; ++k) {
+    /*for (let k = 0; k < 1; ++k) {
       if (this.asteroids[index].sizeMult >= 3) {
         this.asteroids.splice(this.asteroids[index], 1);
         return;
@@ -34,8 +34,8 @@ class Spawner {
         );
         this.asteroids.push(this.asteroid);
       }
-    }
-    this.asteroids.splice(this.asteroids[index], 1);
+    }*/
+    this.asteroids.splice(index, 1);
   }
 
   spawnProjectile(position, target, size) {

@@ -1,14 +1,10 @@
+
 class Collisions {
   constructor(world) {
     this.world = world;
-    this.spawner = this.world.spawner;
-    this.a = this.spawner.asteroids;
-    this.p = this.spawner.projectiles;
+    this.a = this.world.spawner.asteroids;
+    this.p = this.world.spawner.projectiles;
     //(this.masterArray = []), [];
-  }
-
-  checkEverything() {
-    this.masterArray.push(this.spawner.asteroids);
   }
 
   checkAsteroidsAndProjectiles() {
@@ -26,8 +22,10 @@ class Collisions {
               this.pLocation.y + this.pRad > this.aLocation.y - this.aRad &&
               this.pLocation.y - this.pRad < this.aLocation.y + this.aRad
             ) {
-              this.p.splice(this.p[j], 1);
-              this.spawner.destroyAsteroid(i);
+              this.p.splice(j, 1);
+              this.world.spawner.destroyAsteroid(i);
+              return;
+              
             }
           }
         }

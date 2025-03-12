@@ -24,7 +24,7 @@ class World {
   }
 
   update() {
-    this.cMatrix.checkAsteroidsAndProjectiles();
+    
     this.spawner.player.update();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
@@ -36,5 +36,6 @@ class World {
         this.spawner.projectiles[k].update();
       }
     }
+    this.cMatrix.checkAsteroidsAndProjectiles();
   }
 }
