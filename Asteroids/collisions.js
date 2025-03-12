@@ -1,8 +1,9 @@
 class Collisions {
   constructor(world) {
     this.world = world;
-    this.a = this.world.spawner.asteroids;
-    this.p = this.world.spawner.projectiles;
+    this.spawner = this.world.spawner;
+    this.a = this.spawner.asteroids;
+    this.p = this.spawner.projectiles;
     //(this.masterArray = []), [];
   }
 
@@ -26,6 +27,7 @@ class Collisions {
               this.pLocation.y - this.pRad < this.aLocation.y + this.aRad
             ) {
               this.p.splice(this.p[j], 1);
+              this.spawner.destroyAsteroid(i);
             }
           }
         }

@@ -23,6 +23,7 @@ function draw() {
   world.update();
   world.display();
   detectInput();
+  console.log(world.spawner.asteroids.length);
 }
 
 function keyPressed() {

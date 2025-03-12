@@ -19,20 +19,21 @@ class Spawner {
   }
 
   destroyAsteroid(index) {
-    for (let i = 0; i < 2; ++i) {
-      this.heading = random(0, TWO_PI);
-      this.pozish = this.asteroids[index].startPos.copy();
-
+    for (let k = 0; k < 1; ++k) {
       if (this.asteroids[index].sizeMult >= 3) {
         this.asteroids.splice(this.asteroids[index], 1);
-        break;
+        return;
       }
-      this.asteroid = new Asteroid(
-        this.pozish,
-        this.heading,
-        this.asteroids[index].sizeMult + 1
-      );
-      this.asteroids.push(this.asteroid);
+      for (let j = 0; j < 2; ++j) {
+        this.heading = random(0, TWO_PI);
+        this.pozish = this.asteroids[index].startPos.copy();
+        this.asteroid = new Asteroid(
+          this.pozish,
+          this.heading,
+          this.asteroids[index].sizeMult + 1
+        );
+        this.asteroids.push(this.asteroid);
+      }
     }
     this.asteroids.splice(this.asteroids[index], 1);
   }

@@ -1,32 +1,25 @@
-class Asteroid{
+class Asteroid {
+  constructor(position, heading, sizeMult) {
+    this.startPos = position;
+    this.heading = heading;
+    this.base = 70;
+    this.sizeMult = sizeMult;
+    this.size = this.base / this.sizeMult;
+    this.speedMult = this.base / (this.size * 5);
+    this.velocity = createVector(0, 0);
+  }
 
-constructor(position, heading, sizeMult){
+  display() {
+    noStroke();
+    fill("red");
+    circle(this.startPos.x, this.startPos.y, this.size);
+  }
 
-    this.startPos = position
-    this.heading = heading
-    this.base = 70
-    this.sizeMult = sizeMult
-    this.size = this.base / this.sizeMult
-    this.speedMult = this.base / this.size
-    this.velocity = createVector(0,0)
-}
+  update() {
+    this.velocity.x += cos(this.heading - HALF_PI) * this.speedMult;
+    this.velocity.y += sin(this.heading - HALF_PI) * this.speedMult;
 
-display(){
-    noStroke()
-fill('red')
-circle(this.startPos.x, this.startPos.y, this.size)
-
-}
-
-update(){
-
-this.velocity.x += cos(this.heading - HALF_PI) * this.speedMult
-this.velocity.y += sin(this.heading - HALF_PI) * this.speedMult
-
-this.startPos.add(this.velocity)
-this.velocity = createVector(0, 0)
-
-}
-
-
+    this.startPos.add(this.velocity);
+    this.velocity = createVector(0, 0);
+  }
 }
