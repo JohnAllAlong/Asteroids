@@ -2,7 +2,7 @@ class Spawner {
   constructor(world) {
     this.world = world;
     this.asteroids = [];
-    this.startNum = 1;
+    this.startNum = 5;
     this.projectiles = [];
   }
 
@@ -19,9 +19,9 @@ class Spawner {
   }
 
   destroyAsteroid(index) {
-    /*for (let k = 0; k < 1; ++k) {
+    for (let k = 0; k < 1; ++k) {
       if (this.asteroids[index].sizeMult >= 3) {
-        this.asteroids.splice(this.asteroids[index], 1);
+        this.asteroids.splice(index, 1);
         return;
       }
       for (let j = 0; j < 2; ++j) {
@@ -34,7 +34,7 @@ class Spawner {
         );
         this.asteroids.push(this.asteroid);
       }
-    }*/
+    }
     this.asteroids.splice(index, 1);
   }
 

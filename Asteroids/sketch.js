@@ -19,7 +19,6 @@ function draw() {
   world.update();
   world.display();
   detectInput();
-  console.log("From Collisions" + world.spawner.goob);
 }
 
 function keyPressed() {

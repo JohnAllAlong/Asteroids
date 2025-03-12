@@ -5,12 +5,13 @@ class Asteroid {
     this.base = 70;
     this.sizeMult = sizeMult;
     this.size = this.base / this.sizeMult;
-    this.speedMult = this.base / (this.size * 5);
+    this.speedMult = this.base / (this.size * 2);
     this.velocity = createVector(0, 0);
   }
 
   display() {
-    noStroke();
+    stroke('black')
+    strokeWeight(2)
     fill("red");
     circle(this.startPos.x, this.startPos.y, this.size);
   }
