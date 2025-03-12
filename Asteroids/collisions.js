@@ -14,7 +14,7 @@ class Collisions {
         this.aRad = this.a[i].size / 2;
         if (this.p.length != 0) {
           for (let j = 0; j < this.p.length; ++j) {
-            this.pLocation = this.p[j].spawnPos;
+            this.pLocation = this.p[j].position;
             this.pRad = this.p[j].size / 2;
             if (
               this.pLocation.x + this.pRad > this.aLocation.x - this.aRad &&
@@ -23,6 +23,7 @@ class Collisions {
               this.pLocation.y - this.pRad < this.aLocation.y + this.aRad
             ) {
               this.p.splice(j, 1);
+              this.world.spawner.player.currentBullets--
               this.world.spawner.destroyAsteroid(i);
               return;
               

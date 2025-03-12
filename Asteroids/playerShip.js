@@ -11,31 +11,18 @@ class PlayerShip {
     this.isEngineActive = false;
     this.maxBullets = 5;
     this.currentBullets = 0;
-    this.bullets = [];
+    this.colliderSize = 30
+    this.diameter = 40
+    this.rad = this.diameter / 2
   
   }
 
   display() {
     this.drawShip();
-    /*if (this.bullets.length != 0) {
-      for (let i = 0; i < this.bullets.length; ++i) {
-        this.bullets[i].display();
-      }
-    }*/
   }
 
   update() {
     this.updatePosition();
-    /*this.detectInput();
-    if (this.bullets.length != 0) {
-      for (let j = 0; j < this.bullets.length; ++j) {
-        this.bullets[j].update();
-        if (this.bullets[j].isDead) {
-          this.bullets.splice(this.bullets[j], 1);
-          this.currentBullets--;
-        }
-      }
-    }*/
   }
 
   drawShip() {
@@ -55,29 +42,9 @@ class PlayerShip {
     endShape(CLOSE);
     noStroke();
     fill("red");
-    circle(0, 0, 3);
+    circle(0, 0, this.colliderSize);
     pop();
   }
-
-  /*detectInput() {
-    if (keyIsDown("65")) {
-      this.updateRotation(-1);
-    }
-    if (keyIsDown("68")) {
-      this.updateRotation(1);
-    }
-    if (keyIsDown(UP_ARROW)) {
-      this.isEngineActive = true;
-    } else {
-      this.isEngineActive = false;
-    }
-    if (keyIsDown("32")) {
-      this.fireProjectile();
-      this.canFire = false;
-    } else {
-      this.canFire = true;
-    }
-  }*/
 
   updateRotation(input) {
     this.angle = this.angle + input * this.rotationSpeed;
@@ -91,6 +58,7 @@ class PlayerShip {
   updatePosition() {
     this.target.x = cos(this.angle - HALF_PI) * this.movementSpeed;
     this.target.y = sin(this.angle - HALF_PI) * this.movementSpeed;
+    this.wrapAround()
     if (this.isEngineActive) {
       this.velocity.add(this.target);
     }
@@ -105,6 +73,21 @@ class PlayerShip {
     if (this.currentBullets < this.maxBullets && this.canFire) {
       this.velocity.sub(p5.Vector.mult(this.target, 5));
       this.position.add(this.velocity);
+    }
+  }
+
+  wrapAround(){
+    if(this.position.x - this.rad + 1 > windowWidth){
+      this.position.x = 1 - this.rad
+    }
+    if(this.position.x < 0 - this.rad + 1){
+      this.position.x = windowWidth + this.rad - 1
+    }
+    if(this.position.y - this.rad + 1 > windowHeight){
+      this.position.y = 1 - this.rad
+    }
+    if(this.position.y < 0 - this.rad + 1){
+      this.position.y = windowHeight + this.rad - 1
     }
   }
 }

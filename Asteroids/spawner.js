@@ -41,6 +41,16 @@ class Spawner {
   spawnProjectile(position, target, size) {
     this.bullet = new Projectile(position, target, size);
     this.projectiles.push(this.bullet);
+    this.player.currentBullets++
+  }
+
+  destroyProjectile(){
+    for(let m = 0; m < this.projectiles.length; ++m){
+      if(this.projectiles[m].isDead == true){
+        this.projectiles.splice(m, 1);
+        this.player.currentBullets--
+      }
+    }
   }
 
   spawnPlayerShip() {

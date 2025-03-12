@@ -19,6 +19,7 @@ function draw() {
   world.update();
   world.display();
   detectInput();
+  console.log(world.spawner.player.currentBullets)
 }
 
 function keyPressed() {

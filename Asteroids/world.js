@@ -37,5 +37,6 @@ class World {
       }
     }
     this.cMatrix.checkAsteroidsAndProjectiles();
+    this.spawner.destroyProjectile()
   }
 }
