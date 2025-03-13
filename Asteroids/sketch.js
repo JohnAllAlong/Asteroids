@@ -12,6 +12,7 @@ let player;
 let world;
 let bulletSpeed = 40;
 let button;
+let reset;
 let gameStarted;
 
 function setup() {
@@ -28,18 +29,26 @@ function setup() {
 
 function draw() {
   background(10);
+  frameRate(60);
 
   if (!gameStarted) {
     titleScreen();
     return;
   }
 
-  frameRate(60);
-  world.update();
-  world.display();
-  detectInput();
-  fill("red");
-  text("Player Lives: " + player.currentLives, 10, 50);
+  if (player.currentLives <= 0) {
+    gameOverScreen();
+  } else {
+    push();
+    fill("red");
+    text("Player Lives: " + player.currentLives, 10, 50);
+    fill("red");
+    text("Score: " + player.score, width - 150, 50);
+    pop();
+    world.update();
+    world.display();
+    detectInput();
+  }
 }
 
 function keyPressed() {
@@ -96,7 +105,24 @@ function titleScreen() {
   pop();
 }
 
+function gameOverScreen() {
+  push();
+  //background(0);
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  fill("blue");
+  text("GAME OVER", windowWidth / 2, windowHeight / 2 - 50);
+  reset = createButton("Reset");
+  reset.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
+  reset.mousePressed(resetGame);
+  pop();
+}
+
 function playButtonPressed() {
   gameStarted = true;
   button.hide();
+}
+
+function resetGame() {
+  window.location.reload();
 }

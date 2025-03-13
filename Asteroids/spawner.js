@@ -5,6 +5,7 @@ class Spawner {
     this.startNum = 5;
     this.projectiles = [];
     this.saucers = [];
+    this.players = [];
   }
 
   spawnAsteroids() {
@@ -63,6 +64,7 @@ class Spawner {
 
   spawnPlayerShip() {
     this.player = new PlayerShip(windowWidth / 2, windowHeight / 2);
+    this.players.push(this.player);
   }
 
   spawnEnemySaucer() {

@@ -2,12 +2,18 @@ class World {
   constructor() {
     this.spawner = new Spawner(this);
     this.cMatrix = new Collisions(this);
+    this.a = this.spawner.asteroids;
+    this.b = this.spawner.projectiles;
+    this.s = this.spawner.saucers;
+    this.p = this.spawner.players;
+    let knowledge = false;
   }
 
   start() {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
     this.spawner.spawnEnemySaucer();
+    this.spawner.player.currentLives = this.spawner.player.startLives;
   }
 
   display() {
@@ -26,11 +32,10 @@ class World {
       for (let l = 0; l < this.spawner.saucers.length; ++l) {
         this.spawner.saucers[l].display();
       }
+    }
   }
-}
 
   update() {
-    
     this.spawner.player.update();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
@@ -47,7 +52,6 @@ class World {
         this.spawner.saucers[l].update();
       }
     }
-    this.cMatrix.checkAsteroidsAndBullets();
-    this.spawner.destroyProjectile()
+    this.cMatrix.genericCollisionCheck(this.a, this.p);
   }
 }

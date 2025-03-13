@@ -4,7 +4,7 @@ class Collisions {
     this.a = this.world.spawner.asteroids;
     this.b = this.world.spawner.projectiles;
     this.s = this.world.spawner.saucers;
-    //(this.masterArray = []), [];
+    this.p = this.world.spawner.players;
   }
 
   checkAsteroidsAndBullets() {
@@ -53,6 +53,7 @@ class Collisions {
               this.sLocation.y + this.sRad > this.pLocation.y - this.pRad &&
               this.sLocation.y - this.sRad < this.pLocation.y + this.pRad
             ) {
+              this.world.spawner.player.score += this.s[k].scoreVal;
               this.s.splice(k, 1);
               this.world.spawner.spawnEnemySaucer();
               if (this.world.spawner.player.canCollide == true) {
@@ -117,5 +118,33 @@ class Collisions {
         }
       }
     }
+  }
+
+  genericCollisionCheck(arr1, arr2) {
+    if (arr1.length != 0)
+      for (let i = 0; i < arr1.length; i++) {
+        this.obj1Pos = arr1[i].position;
+        this.obj1Rad = arr1[i].rad;
+        if (arr2.length != 0) {
+          for (let j = 0; j < arr2.length; j++) {
+            this.obj2Pos = arr2[j].position;
+            this.obj2Rad = arr2[j].rad;
+            if (
+              this.obj1Pos.x + this.obj1Rad > this.obj2Pos.x - this.obj2Rad &&
+              this.obj1Pos.x - this.obj1Rad < this.obj2Pos.x + this.obj2Rad &&
+              this.obj1Pos.y + this.obj1Rad > this.obj2Pos.y - this.obj2Rad &&
+              this.obj1Pos.y - this.obj1Rad < this.obj2Pos.y + this.obj2Rad
+            ) {
+              if (arr1 == a && arr2 == p) {
+                this.world.spawner.destroyAsteroid(i);
+                if (this.p[j].canCollide == true) {
+                  this.p[j].resetPlayerShip();
+                }
+                return;
+              }
+            }
+          }
+        }
+      }
   }
 }

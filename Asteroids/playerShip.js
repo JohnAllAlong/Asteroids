@@ -16,10 +16,10 @@ class PlayerShip {
     this.rad = this.diameter / 2;
     this.canCollide = true;
     this.fillColor = color(0, 100, 200, 150);
-    this.invulnerableTimer = 5;
+    this.invulnerableTimer = 2;
     this.currentTime = this.invulnerableTimer + 1;
-    this.maxLives = 3;
-    this.currentLives = this.maxLives;
+    this.startLives = 30;
+    this.currentLives = this.startLives;
     this.score = 0;
   }
 
@@ -33,6 +33,9 @@ class PlayerShip {
     this.currentTime += millis() / 1000 / frameCount;
     if (this.currentTime >= this.invulnerableTimer) {
       this.canCollide = true;
+    }
+    if (this.currentLives < 0) {
+      this.currentLives = 0;
     }
   }
 
