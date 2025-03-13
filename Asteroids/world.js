@@ -26,11 +26,10 @@ class World {
       for (let l = 0; l < this.spawner.saucers.length; ++l) {
         this.spawner.saucers[l].display();
       }
+    }
   }
-}
 
   update() {
-    
     this.spawner.player.update();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
@@ -47,7 +46,9 @@ class World {
         this.spawner.saucers[l].update();
       }
     }
-    this.cMatrix.checkAsteroidsAndBullets();
-    this.spawner.destroyProjectile()
+    this.cMatrix.checkAsteroids();
+    //this.cMatrix.checkSaucers();
+    //this.cMatrix.checkPlayer();
+    this.spawner.destroyProjectile();
   }
 }

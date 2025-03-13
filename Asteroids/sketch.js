@@ -38,8 +38,11 @@ function draw() {
   world.update();
   world.display();
   detectInput();
+  push();
   fill("red");
-  text("Player Lives: " + player.currentLives, 10, 50);
+  text("Player Lives: " + player.currentLives, 50, 50);
+  text("Score: " + player.score, windowWidth - 150, 50);
+  pop();
 }
 
 function keyPressed() {
