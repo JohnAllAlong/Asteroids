@@ -140,7 +140,8 @@ class Collisions {
                 if (this.p[j].canCollide == true) {
                   this.p[j].resetPlayerShip();
                 }
-                return;
+              } else if (arr1 == a && arr2 == b) {
+                this.world.knowledge = true;
               }
             }
           }

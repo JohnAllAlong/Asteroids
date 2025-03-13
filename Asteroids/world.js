@@ -6,13 +6,13 @@ class World {
     this.b = this.spawner.projectiles;
     this.s = this.spawner.saucers;
     this.p = this.spawner.players;
+    this.knowledge = false;
   }
 
   start() {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
     this.spawner.spawnEnemySaucer();
-    this.spawner.players[0].currentLives = this.spawner.players[0].startLives;
   }
 
   display() {
@@ -51,6 +51,7 @@ class World {
         this.spawner.saucers[l].update();
       }
     }
-    this.cMatrix.genericCollisionCheck(this.a, this.p);
+    this.cMatrix.genericCollisionCheck(this.a, this.b);
+    //this.cMatrix.checkAsteroidsAndBullets();
   }
 }
