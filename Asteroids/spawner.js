@@ -50,14 +50,13 @@ class Spawner {
       fillColor
     );
     this.projectiles.push(this.bullet);
-    //this.player.currentBullets++
   }
 
   destroyProjectile() {
     for (let m = 0; m < this.projectiles.length; ++m) {
       if (this.projectiles[m].isDead == true) {
         this.projectiles.splice(m, 1);
-        this.player.currentBullets--;
+        this.players[0].currentBullets--;
       }
     }
   }

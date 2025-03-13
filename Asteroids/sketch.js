@@ -19,7 +19,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   world = new World();
   world.start();
-  player = world.spawner.player;
+  player = world.spawner.players[0];
   textSize(25);
   noStroke();
   gameStarted = false;

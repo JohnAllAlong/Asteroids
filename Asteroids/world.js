@@ -6,18 +6,17 @@ class World {
     this.b = this.spawner.projectiles;
     this.s = this.spawner.saucers;
     this.p = this.spawner.players;
-    let knowledge = false;
   }
 
   start() {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
     this.spawner.spawnEnemySaucer();
-    this.spawner.player.currentLives = this.spawner.player.startLives;
+    this.spawner.players[0].currentLives = this.spawner.players[0].startLives;
   }
 
   display() {
-    this.spawner.player.display();
+    this.spawner.players[0].display();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].display();
@@ -36,7 +35,7 @@ class World {
   }
 
   update() {
-    this.spawner.player.update();
+    this.spawner.players[0].update();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].update();
