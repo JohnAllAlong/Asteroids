@@ -40,16 +40,23 @@ class Spawner {
   }
 
   spawnProjectile(position, target, speed, owner, lifetime, fillColor) {
-    this.bullet = new Projectile(position, target, speed, owner, lifetime, fillColor);
+    this.bullet = new Projectile(
+      position,
+      target,
+      speed,
+      owner,
+      lifetime,
+      fillColor
+    );
     this.projectiles.push(this.bullet);
     //this.player.currentBullets++
   }
 
-  destroyProjectile(){
-    for(let m = 0; m < this.projectiles.length; ++m){
-      if(this.projectiles[m].isDead == true){
+  destroyProjectile() {
+    for (let m = 0; m < this.projectiles.length; ++m) {
+      if (this.projectiles[m].isDead == true) {
         this.projectiles.splice(m, 1);
-        this.player.currentBullets--
+        this.player.currentBullets--;
       }
     }
   }
@@ -58,8 +65,8 @@ class Spawner {
     this.player = new PlayerShip(windowWidth / 2, windowHeight / 2);
   }
 
-  spawnEnemySaucer(){
-    this.saucer = new Saucer(50, 50, this.world)
-    this.saucers.push(this.saucer)
+  spawnEnemySaucer() {
+    this.saucer = new Saucer(50, 50, this.world, int(random(1, 3)));
+    this.saucers.push(this.saucer);
   }
 }
