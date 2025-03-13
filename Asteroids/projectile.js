@@ -1,13 +1,14 @@
 class Projectile {
-  constructor(position, direction, speed) {
+  constructor(position, direction, speed, owner, lifetime) {
     this.position = position.copy();
     this.forceDirection = direction.copy();
     this.speedMult = speed;
-    this.lifetime = 3;
+    this.lifetime = lifetime;
     this.currentTime = 0;
     this.isDead = false;
     this.size = 10;
     this.rad = this.size / 2
+    this.owner = owner
   }
 
   display() {

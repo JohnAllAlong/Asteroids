@@ -7,10 +7,12 @@ class World {
   start() {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
+    this.spawner.spawnEnemySaucer();
   }
 
   display() {
     this.spawner.player.display();
+    this.spawner.saucer.display()
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].display();
@@ -26,6 +28,7 @@ class World {
   update() {
     
     this.spawner.player.update();
+    this.spawner.saucer.update()
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].update();
@@ -36,7 +39,7 @@ class World {
         this.spawner.projectiles[k].update();
       }
     }
-    this.cMatrix.checkAsteroidsAndProjectiles();
+    this.cMatrix.checkAsteroidsAndBullets();
     this.spawner.destroyProjectile()
   }
 }

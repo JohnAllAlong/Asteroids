@@ -5,6 +5,7 @@
 
 let player;
 let world;
+let bulletSpeed = 40;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,7 +20,7 @@ function draw() {
   world.update();
   world.display();
   detectInput();
-  console.log(world.spawner.player.currentBullets)
+  console.log(world.spawner.saucer.bullets)
 }
 
 function keyPressed() {
@@ -47,7 +48,7 @@ function detectInput() {
     if (keyIsDown("32")) {
       player.getBulletInfo();
       if (player.currentBullets < player.maxBullets && player.canFire) {
-        world.spawner.spawnProjectile(player.position, player.target, 40);
+        world.spawner.spawnProjectile(player.position, player.target, bulletSpeed, "Player", 3);
       }
       player.canFire = false;
     } else {

@@ -41,7 +41,7 @@ class PlayerShip {
     vertex(15, 10);
     endShape(CLOSE);
     noStroke();
-    fill("red");
+    fill("blue");
     circle(0, 0, this.colliderSize);
     pop();
   }

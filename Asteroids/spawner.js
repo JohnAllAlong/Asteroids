@@ -38,8 +38,8 @@ class Spawner {
     this.asteroids.splice(index, 1);
   }
 
-  spawnProjectile(position, target, size) {
-    this.bullet = new Projectile(position, target, size);
+  spawnProjectile(position, target, speed, owner, lifetime) {
+    this.bullet = new Projectile(position, target, speed, owner, lifetime);
     this.projectiles.push(this.bullet);
     this.player.currentBullets++
   }
@@ -55,5 +55,9 @@ class Spawner {
 
   spawnPlayerShip() {
     this.player = new PlayerShip(windowWidth / 2, windowHeight / 2);
+  }
+
+  spawnEnemySaucer(){
+    this.saucer = new Saucer(50, 50, this.world)
   }
 }
