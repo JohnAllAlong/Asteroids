@@ -14,15 +14,25 @@ class PlayerShip {
     this.colliderSize = 30
     this.diameter = 40
     this.rad = this.diameter / 2
-  
+    this.canCollide = true;
+    this.fillColor = color(0, 100, 200, 150)
+    this.invulnerableTimer = 5;
+    this.currentTime = this.invulnerableTimer + 1;
+    this.maxLives = 3;
+    this.currentLives = this.maxLives;
   }
 
   display() {
     this.drawShip();
+    this.drawShield();
   }
 
   update() {
     this.updatePosition();
+    this.currentTime += millis() / 1000 / frameCount;
+    if(this.currentTime >= this.invulnerableTimer){
+      this.canCollide = true;
+    }
   }
 
   drawShip() {
@@ -40,9 +50,6 @@ class PlayerShip {
     vertex(5, 10);
     vertex(15, 10);
     endShape(CLOSE);
-    noStroke();
-    fill("blue");
-    circle(0, 0, this.colliderSize);
     pop();
   }
 
@@ -89,5 +96,24 @@ class PlayerShip {
     if(this.position.y < 0 - this.rad + 1){
       this.position.y = windowHeight + this.rad - 1
     }
+  }
+  resetPlayerShip(){
+    this.currentLives--
+    this.position = createVector(windowWidth / 2, windowHeight / 2)
+    this.velocity.set(0,0)
+    this.angle = 0
+    this.canCollide = false;
+    this.currentTime = 0;
+  }
+
+  drawShield(){
+    if(this.canCollide == false){
+      fill(this.fillColor)
+      circle(this.position.x, this.position.y, this.rad * 3)
+    }
+  }
+
+  teleport(){
+    this.position = createVector(random(0, windowWidth), random(0, windowHeight))
   }
 }

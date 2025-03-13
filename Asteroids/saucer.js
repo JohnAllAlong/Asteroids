@@ -24,7 +24,7 @@ class Saucer{
 
     update(){
         
-        //this.shootTimer()
+        this.shootTimer()
         this.force = p5.Vector.mult(this.velocity, this.movementSpeed)
         this.wrapAround()
         this.position.add(this.force)
@@ -49,7 +49,7 @@ class Saucer{
         this.currentTime += millis() / 1000 / frameCount;
         if(this.currentTime >= this.fireRate){
         this.target = createVector(-0.05, 0.05)
-            this.world.spawner.spawnProjectile(this.position, this.target, 30, "Enemy", 5)
+            this.world.spawner.spawnProjectile(this.position, this.target, 30, "Enemy", 5, "yellow")
             this.bullets++
             this.currentTime = 0;
        }

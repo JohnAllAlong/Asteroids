@@ -4,6 +4,7 @@ class Spawner {
     this.asteroids = [];
     this.startNum = 5;
     this.projectiles = [];
+    this.saucers = [];
   }
 
   spawnAsteroids() {
@@ -38,10 +39,10 @@ class Spawner {
     this.asteroids.splice(index, 1);
   }
 
-  spawnProjectile(position, target, speed, owner, lifetime) {
-    this.bullet = new Projectile(position, target, speed, owner, lifetime);
+  spawnProjectile(position, target, speed, owner, lifetime, fillColor) {
+    this.bullet = new Projectile(position, target, speed, owner, lifetime, fillColor);
     this.projectiles.push(this.bullet);
-    this.player.currentBullets++
+    //this.player.currentBullets++
   }
 
   destroyProjectile(){
@@ -59,5 +60,6 @@ class Spawner {
 
   spawnEnemySaucer(){
     this.saucer = new Saucer(50, 50, this.world)
+    this.saucers.push(this.saucer)
   }
 }

@@ -1,5 +1,5 @@
 class Projectile {
-  constructor(position, direction, speed, owner, lifetime) {
+  constructor(position, direction, speed, owner, lifetime, fillColor) {
     this.position = position.copy();
     this.forceDirection = direction.copy();
     this.speedMult = speed;
@@ -9,11 +9,12 @@ class Projectile {
     this.size = 10;
     this.rad = this.size / 2
     this.owner = owner
+    this.fillColor = fillColor
   }
 
   display() {
     noStroke();
-    fill("green");
+    fill(this.fillColor);
     circle(this.position.x, this.position.y, this.size);
   }
 
