@@ -2,11 +2,16 @@
 //A AND D TO ROTATE
 //UP ARROW TO FIRE ENGINE
 //SPACEBAR TO SHOOT
+//T TO TELEPORT
+
+//DEV CONTROLS//
+//J TO SPAWN ASTEROIDS
+//K TO DESTROY ONE ASTEROID
 
 let player;
 let world;
 let bulletSpeed = 40;
-let button
+let button;
 let gameStarted;
 
 function setup() {
@@ -14,28 +19,27 @@ function setup() {
   world = new World();
   world.start();
   player = world.spawner.player;
-  textSize(25)
-  noStroke()
+  textSize(25);
+  noStroke();
   gameStarted = false;
-  button = createButton("Play")
-  button.position(windowWidth / 2 - 25, windowHeight / 2 + 50)
-  
+  button = createButton("Play");
+  button.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
 }
 
 function draw() {
   background(10);
 
-  if(!gameStarted){
-      titleScreen();
-      return;
+  if (!gameStarted) {
+    titleScreen();
+    return;
   }
 
   frameRate(60);
   world.update();
   world.display();
   detectInput();
-  fill("red")
-  text("Player Lives: " + player.currentLives, 10, 50)
+  fill("red");
+  text("Player Lives: " + player.currentLives, 10, 50);
 }
 
 function keyPressed() {
@@ -45,8 +49,8 @@ function keyPressed() {
   if (key === "k") {
     world.spawner.destroyAsteroid(0);
   }
-  if(key === "t"){
-    player.teleport()
+  if (key === "t") {
+    player.teleport();
   }
 }
 
@@ -66,7 +70,14 @@ function detectInput() {
     if (keyIsDown("32")) {
       player.getBulletInfo();
       if (player.currentBullets < player.maxBullets && player.canFire) {
-        world.spawner.spawnProjectile(player.position, player.target, bulletSpeed, "Player", 3, "green");
+        world.spawner.spawnProjectile(
+          player.position,
+          player.target,
+          bulletSpeed,
+          "Player",
+          3,
+          "green"
+        );
       }
       player.canFire = false;
     } else {
@@ -75,17 +86,17 @@ function detectInput() {
   }
 }
 
-function titleScreen(){
-  push()
-  textAlign(CENTER, CENTER)
-  textSize(50)
-  fill("green")
-  text("ASTEROIDS", windowWidth / 2, windowHeight / 2 - 50)
-  button.mousePressed(playButtonPressed)
-  pop()
+function titleScreen() {
+  push();
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  fill("green");
+  text("ASTEROIDS", windowWidth / 2, windowHeight / 2 - 50);
+  button.mousePressed(playButtonPressed);
+  pop();
 }
 
-function playButtonPressed(){
+function playButtonPressed() {
   gameStarted = true;
-  button.hide()
+  button.hide();
 }

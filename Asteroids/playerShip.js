@@ -11,15 +11,16 @@ class PlayerShip {
     this.isEngineActive = false;
     this.maxBullets = 5;
     this.currentBullets = 0;
-    this.colliderSize = 30
-    this.diameter = 40
-    this.rad = this.diameter / 2
+    this.colliderSize = 30;
+    this.diameter = 40;
+    this.rad = this.diameter / 2;
     this.canCollide = true;
-    this.fillColor = color(0, 100, 200, 150)
+    this.fillColor = color(0, 100, 200, 150);
     this.invulnerableTimer = 5;
     this.currentTime = this.invulnerableTimer + 1;
     this.maxLives = 3;
     this.currentLives = this.maxLives;
+    this.score = 0;
   }
 
   display() {
@@ -30,7 +31,7 @@ class PlayerShip {
   update() {
     this.updatePosition();
     this.currentTime += millis() / 1000 / frameCount;
-    if(this.currentTime >= this.invulnerableTimer){
+    if (this.currentTime >= this.invulnerableTimer) {
       this.canCollide = true;
     }
   }
@@ -65,14 +66,14 @@ class PlayerShip {
   updatePosition() {
     this.target.x = cos(this.angle - HALF_PI) * this.movementSpeed;
     this.target.y = sin(this.angle - HALF_PI) * this.movementSpeed;
-    this.wrapAround()
+    this.wrapAround();
     if (this.isEngineActive) {
       this.velocity.add(this.target);
     }
     this.position.add(this.velocity);
     this.velocity.mult(0.98);
-    if(this.velocity.mag() <= 0.09){
-        this.velocity.set(0,0)
+    if (this.velocity.mag() <= 0.09) {
+      this.velocity.set(0, 0);
     }
   }
 
@@ -83,37 +84,41 @@ class PlayerShip {
     }
   }
 
-  wrapAround(){
-    if(this.position.x - this.rad + 1 > windowWidth){
-      this.position.x = 1 - this.rad
+  wrapAround() {
+    if (this.position.x - this.rad + 1 > windowWidth) {
+      this.position.x = 1 - this.rad;
     }
-    if(this.position.x < 0 - this.rad + 1){
-      this.position.x = windowWidth + this.rad - 1
+    if (this.position.x < 0 - this.rad + 1) {
+      this.position.x = windowWidth + this.rad - 1;
     }
-    if(this.position.y - this.rad + 1 > windowHeight){
-      this.position.y = 1 - this.rad
+    if (this.position.y - this.rad + 1 > windowHeight) {
+      this.position.y = 1 - this.rad;
     }
-    if(this.position.y < 0 - this.rad + 1){
-      this.position.y = windowHeight + this.rad - 1
+    if (this.position.y < 0 - this.rad + 1) {
+      this.position.y = windowHeight + this.rad - 1;
     }
   }
-  resetPlayerShip(){
-    this.currentLives--
-    this.position = createVector(windowWidth / 2, windowHeight / 2)
-    this.velocity.set(0,0)
-    this.angle = 0
+  resetPlayerShip() {
+    this.currentLives--;
+    this.position = createVector(windowWidth / 2, windowHeight / 2);
+    this.velocity.set(0, 0);
+    this.angle = 0;
     this.canCollide = false;
     this.currentTime = 0;
   }
 
-  drawShield(){
-    if(this.canCollide == false){
-      fill(this.fillColor)
-      circle(this.position.x, this.position.y, this.rad * 3)
+  drawShield() {
+    if (this.canCollide == false) {
+      noStroke();
+      fill(this.fillColor);
+      circle(this.position.x, this.position.y, this.rad * 3);
     }
   }
 
-  teleport(){
-    this.position = createVector(random(0, windowWidth), random(0, windowHeight))
+  teleport() {
+    this.position = createVector(
+      random(0, windowWidth),
+      random(0, windowHeight)
+    );
   }
 }

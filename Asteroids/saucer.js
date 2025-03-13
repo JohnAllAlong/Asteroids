@@ -20,8 +20,12 @@ class Saucer {
   }
 
   display() {
+    push();
+    strokeWeight(1);
+    stroke("white");
     fill(this.fillColor);
     ellipse(this.position.x, this.position.y, this.width, this.height);
+    pop();
   }
 
   update() {

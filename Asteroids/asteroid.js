@@ -12,8 +12,8 @@ class Asteroid {
   }
 
   display() {
-    stroke("black");
-    strokeWeight(2);
+    stroke("white");
+    strokeWeight(1);
     fill("red");
     circle(this.position.x, this.position.y, this.size);
   }
