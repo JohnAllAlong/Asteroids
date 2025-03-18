@@ -13,7 +13,7 @@ class Collisions {
         this.aLocation = this.a[i].position;
         this.aRad = this.a[i].size / 2;
         //Player and Asteroids
-        if (this.world.spawner.player != null) {
+        if (this.p.length != 0) {
           this.pLocation = this.world.spawner.player.position;
           this.pRad = this.world.spawner.player.rad;
           if (
@@ -135,12 +135,12 @@ class Collisions {
               this.obj1Pos.y + this.obj1Rad > this.obj2Pos.y - this.obj2Rad &&
               this.obj1Pos.y - this.obj1Rad < this.obj2Pos.y + this.obj2Rad
             ) {
-              if (arr1 == a && arr2 == p) {
+              if (arr1 == a && arr2 == this.p) {
                 this.world.spawner.destroyAsteroid(i);
                 if (this.p[j].canCollide == true) {
                   this.p[j].resetPlayerShip();
                 }
-              } else if (arr1 == a && arr2 == b) {
+              } else if (arr1 == this.a && arr2 == this.b) {
                 this.world.knowledge = true;
               }
             }

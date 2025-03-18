@@ -51,7 +51,7 @@ class World {
         this.spawner.saucers[l].update();
       }
     }
-    this.cMatrix.genericCollisionCheck(this.a, this.b);
+    this.cMatrix.genericCollisionCheck(this.a, this.p);
     //this.cMatrix.checkAsteroidsAndBullets();
   }
 }

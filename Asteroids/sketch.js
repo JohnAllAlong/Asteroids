@@ -36,7 +36,7 @@ function draw() {
     return;
   }
 
-  if (player.currentLives <= 0) {
+  if (player.currentLives <= 0) { 
     gameOverScreen();
   } else {
     push();
