@@ -48,7 +48,7 @@ function draw() {
     world.update();
     world.display();
     detectInput();
-    console.log(world.knowledge);
+    console.log(player.currentBullets);
   }
 }
 

@@ -52,6 +52,12 @@ class World {
       }
     }
     this.cMatrix.genericCollisionCheck(this.a, this.p);
+    this.cMatrix.genericCollisionCheck(this.a, this.b);
+    this.cMatrix.genericCollisionCheck(this.a, this.s);
+    this.cMatrix.genericCollisionCheck(this.b, this.s);
+    this.cMatrix.genericCollisionCheck(this.b, this.p);
+    this.cMatrix.genericCollisionCheck(this.s, this.p);
+
     //this.cMatrix.checkAsteroidsAndBullets();
   }
 }

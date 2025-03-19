@@ -20,7 +20,9 @@ class PlayerShip {
     this.currentTime = this.invulnerableTimer + 1;
     this.startLives = 30;
     this.currentLives = this.startLives;
+    this.earnedLives = 0
     this.score = 0;
+    this.addLivesAtScore = 10000;
   }
 
   display() {
@@ -36,6 +38,10 @@ class PlayerShip {
     }
     if (this.currentLives < 0) {
       this.currentLives = 0;
+    }
+    if(this.score >= this.addLivesAtScore + (this.addLivesAtScore * this.earnedLives)){
+      this.earnedLives += 1;
+      this.currentLives += 1;
     }
   }
 

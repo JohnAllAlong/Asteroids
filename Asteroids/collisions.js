@@ -7,7 +7,7 @@ class Collisions {
     this.p = this.world.spawner.players;
   }
 
-  checkAsteroidsAndBullets() {
+  /*checkAsteroidsAndBullets() {
     if (this.a.length != 0) {
       for (let i = 0; i < this.a.length; ++i) {
         this.aLocation = this.a[i].position;
@@ -118,8 +118,9 @@ class Collisions {
         }
       }
     }
-  }
+  }*/
 
+    //My collision check math, plus the matrix to determine what happens when.
   genericCollisionCheck(arr1, arr2) {
     if (arr1.length != 0)
       for (let i = 0; i < arr1.length; i++) {
@@ -135,17 +136,76 @@ class Collisions {
               this.obj1Pos.y + this.obj1Rad > this.obj2Pos.y - this.obj2Rad &&
               this.obj1Pos.y - this.obj1Rad < this.obj2Pos.y + this.obj2Rad
             ) {
-              if (arr1 == a && arr2 == this.p) {
-                this.world.spawner.destroyAsteroid(i);
+              //Asteroids vs.
+              if (arr1 == this.a) {
+                //Player
+                if(arr2 == this.p){
+                  arr2[j].score += arr1[i].scoreVal
+                  this.world.spawner.destroyAsteroid(i);
                 if (this.p[j].canCollide == true) {
                   this.p[j].resetPlayerShip();
                 }
-              } else if (arr1 == this.a && arr2 == this.b) {
-                this.world.knowledge = true;
+                }
+                //Bullets
+                else if(arr2 == this.b){
+                  if(arr2[j].owner == "Player"){
+                  this.p[0].score += arr1[i].scoreVal
+                  this.p[0].currentBullets--;
+                  }
+                  arr2.splice(j, 1);
+                  this.world.spawner.destroyAsteroid(i);
+                  return;
+                }
+                //Saucers
+                else if(arr2 == this.s){
+                  this.world.spawner.destroyAsteroid(i);
+                  arr2.splice(j, 1);
+                  this.world.spawner.spawnEnemySaucer();
+                  return;
+                }
+              //Bullets vs.
+              }
+              else if(arr1 == this.b){
+                //Saucers
+                if(arr2 == this.s){
+                  if(arr1[i].owner == "Player"){
+                    arr1.splice(i, 1);
+                    this.p[0].score += arr2[j].scoreVal
+                    this.p[0].currentBullets--;
+                    arr2.splice(j, 1);
+                    this.world.spawner.spawnEnemySaucer();
+                    return;
+                  }
+                }
+                //Player
+                else if(arr2 == this.p){
+                  if(arr1[i].owner == "Enemy"){
+                    arr1.splice(i, 1);
+                    if (arr2[0].canCollide == true) {
+                      arr2[0].resetPlayerShip();
+                  }
+                }
               }
             }
+              //Saucers vs.
+              else if(arr1 == this.s){
+                //Player
+                if(arr2 == this.p){
+                  arr2[j].score += arr1[i].scoreVal;
+                  arr1.splice(i, 1);
+                  this.world.spawner.spawnEnemySaucer();
+                    if (arr2[j].canCollide == true) {
+                      arr2[j].resetPlayerShip();
+                    }
+                }
+              }
+              else{
+                dfieebfisdfjolkdsjlkf
+              }
+            
           }
         }
       }
+    }
   }
 }
