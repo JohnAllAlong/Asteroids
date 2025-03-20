@@ -14,6 +14,8 @@ let bulletSpeed = 5;
 let button;
 let reset;
 let gameStarted;
+let particles = [];
+let particle;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -36,7 +38,7 @@ function draw() {
     return;
   }
 
-  if (player.currentLives <= 0) { 
+  if (player.currentLives <= 0) {
     gameOverScreen();
   } else {
     push();
@@ -45,11 +47,21 @@ function draw() {
     fill("red");
     text("Score: " + player.score, width - 150, 50);
     pop();
+
     world.update();
     world.display();
     detectInput();
-    console.log("Target X: " + player.target.x);
-    console.log("Target Y: " + player.target.y);
+    if (particles.length != 0) {
+      for (let j = 0; j < particles.length; ++j) {
+        particles[j].display();
+        particles[j].update();
+      }
+    }
+    if (world.spawner.particles.length != 0) {
+      for (q = 0; q < world.spawner.particles.length; ++q) {
+        console.log(world.spawner.particles[q].ahVector);
+      }
+    }
   }
 }
 
@@ -88,7 +100,7 @@ function detectInput() {
           3,
           "green"
         );
-        player.getBulletInfo()
+        player.getBulletInfo();
       }
       player.canFire = false;
     } else {
@@ -125,6 +137,21 @@ function playButtonPressed() {
   button.hide();
 }
 
+//M3
 function resetGame() {
   window.location.reload();
 }
+
+/*function mouseClicked() {
+  spawnyParty();
+}*/
+
+/*function spawnyParty() {
+  let numParticles = 10;
+  for (let b = 0; b < numParticles; ++b) {
+    let randomVector = createVector(random(-1, 1), random(-1, 1));
+    let startMosPos = createVector(mouseX, mouseY);
+    particle = new Particle(world, startMosPos, randomVector, random(0.5, 2));
+    particles.push(particle);
+  }
+}*/

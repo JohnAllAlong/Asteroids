@@ -2,13 +2,16 @@ class Spawner {
   constructor(world) {
     this.world = world;
     this.asteroids = [];
-    this.startNum = 1;
     this.projectiles = [];
     this.saucers = [];
     this.players = [];
+    this.particles = [];
     this.saucerCanSpawn = true;
+    this.startNum = 1;
     this.saucerScoreInterval = 1200;
     this.saucersSpawned = 0;
+    this.numParticles = 30;
+    this.particleDirection = createVector(0, 0);
   }
 
   spawnAsteroids() {
@@ -69,28 +72,64 @@ class Spawner {
     this.players.push(this.player);
   }
 
+  //M3
   spawnEnemySaucer() {
-    if(this.saucerCanSpawn == true){
-    this.randomValue = random(0, 10)
-      if(this.randomValue <= 3){
-        this.sizeMult = 1
+    if (this.saucerCanSpawn == true) {
+      this.randomValue = random(0, 10);
+      if (this.randomValue <= 3) {
+        this.sizeMult = 1;
+      } else {
+        this.sizeMult = 2;
       }
-      else{
-        this.sizeMult = 2
-      }
-    this.saucer = new Saucer(50, 50, this.world, this.sizeMult);
-    this.saucers.push(this.saucer);
-    this.saucersSpawned++
-    this.saucerCanSpawn = false
+      this.saucer = new Saucer(
+        random(0, windowWidth),
+        random(0, windowHeight),
+        this.world,
+        this.sizeMult
+      );
+      this.saucers.push(this.saucer);
+      this.saucersSpawned++;
+      this.saucerCanSpawn = false;
     }
   }
 
   //Find a better place to move saucer spawning/score logic
+  //M3
+  saucerSpawnInterval() {
+    if (
+      this.players[0].score >=
+      this.saucerScoreInterval * this.saucersSpawned
+    ) {
+      this.saucerCanSpawn = true;
+      this.spawnEnemySaucer();
+    }
+  }
 
-  saucerSpawnInterval(){
-    if(this.players[0].score >= this.saucerScoreInterval * this.saucersSpawned){
-      this.saucerCanSpawn = true
-      this.spawnEnemySaucer()
+  spawnParticles(objRef) {
+    for (let w = 0; w < this.numParticles; ++w) {
+      this.sizerino = random(3, 6);
+      this.randomX = random(-windowWidth, windowWidth);
+      this.randomY = random(-windowHeight, windowHeight);
+      this.randomDir = createVector(this.randomX, this.randomY);
+      this.randNorm = p5.Vector.normalize(this.randomDir);
+      this.spawnPos = objRef.position.copy();
+      this.particle = new Particle(
+        this.world,
+        this.spawnPos,
+        this.randNorm,
+        this.sizerino
+      );
+      this.particles.push(this.particle);
+    }
+  }
+
+  destroyParticles() {
+    if (this.particles.length != 0) {
+      for (let v = 0; v < this.particles.length; ++v) {
+        if (this.particles[v].isDead == true) {
+          this.particles.splice(v, 1);
+        }
+      }
     }
   }
 }

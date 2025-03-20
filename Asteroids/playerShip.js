@@ -19,19 +19,25 @@ class PlayerShip {
     this.fillColor = color(0, 100, 200, 150);
     this.invulnerableTimer = 2;
     this.currentTime = this.invulnerableTimer + 1;
-    this.startLives = 3;
+    this.startLives = 30;
     this.currentLives = this.startLives;
-    this.earnedLives = 0
+    this.earnedLives = 0;
     this.score = 0;
+    //BONUS LIFE
     this.addLivesAtScore = 10000;
   }
 
   display() {
     this.drawShip();
     this.drawShield();
-    if(this.target != null){
-      stroke('yellow')
-      line(this.position.x, this.position.y, this.direction.x, this.direction.y)
+    if (this.target != null) {
+      stroke("yellow");
+      line(
+        this.position.x,
+        this.position.y,
+        this.direction.x,
+        this.direction.y
+      );
     }
   }
 
@@ -44,7 +50,10 @@ class PlayerShip {
     if (this.currentLives < 0) {
       this.currentLives = 0;
     }
-    if(this.score >= this.addLivesAtScore + (this.addLivesAtScore * this.earnedLives)){
+    if (
+      this.score >=
+      this.addLivesAtScore + this.addLivesAtScore * this.earnedLives
+    ) {
       this.earnedLives += 1;
       this.currentLives += 1;
     }
@@ -80,13 +89,13 @@ class PlayerShip {
   updatePosition() {
     this.target.x = cos(this.angle - HALF_PI) * this.movementSpeed;
     this.target.y = sin(this.angle - HALF_PI) * this.movementSpeed;
-    
+
     this.wrapAround();
     if (this.isEngineActive) {
       this.velocity.add(this.target);
     }
     this.position.add(this.velocity);
-    this.direction = p5.Vector.add(this.position, this.target)
+    this.direction = p5.Vector.add(this.position, this.target);
     this.velocity.mult(0.98);
     if (this.velocity.mag() <= 0.09) {
       this.velocity.set(0, 0);
@@ -94,8 +103,8 @@ class PlayerShip {
   }
 
   getBulletInfo() {
-      this.velocity.sub(p5.Vector.mult(this.target, 5));
-      this.position.add(this.velocity);
+    this.velocity.sub(p5.Vector.mult(this.target, 5));
+    this.position.add(this.velocity);
   }
 
   wrapAround() {
