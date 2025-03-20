@@ -5,6 +5,9 @@ class Collisions {
     this.b = this.world.spawner.projectiles;
     this.s = this.world.spawner.saucers;
     this.p = this.world.spawner.players;
+    this.ast = "a";
+    this.es = "s";
+    this.pl = "p";
   }
 
   /*checkAsteroidsAndBullets() {
@@ -141,9 +144,11 @@ class Collisions {
                 //Player
                 if (arr2 == this.p) {
                   arr2[j].score += arr1[i].scoreVal;
+                  this.world.spawner.spawnParticles(arr1[i], this.ast);
                   this.world.spawner.destroyAsteroid(i);
                   this.world.shakeCueterie();
                   if (this.p[j].canCollide == true) {
+                    this.world.spawner.spawnParticles(arr2[j], this.pl);
                     this.p[j].resetPlayerShip();
                   }
                 }
@@ -153,7 +158,7 @@ class Collisions {
                     this.p[0].score += arr1[i].scoreVal;
                     this.p[0].currentBullets--;
                   }
-                  this.world.spawner.spawnParticles(arr1[i]);
+                  this.world.spawner.spawnParticles(arr1[i], this.ast);
                   arr2.splice(j, 1);
                   this.world.spawner.destroyAsteroid(i);
                   this.world.shakeCueterie();
@@ -161,6 +166,8 @@ class Collisions {
                 }
                 //Saucers
                 else if (arr2 == this.s) {
+                  this.world.spawner.spawnParticles(arr1[i], this.ast);
+                  this.world.spawner.spawnParticles(arr2[j], this.es);
                   this.world.spawner.destroyAsteroid(i);
                   arr2.splice(j, 1);
                   this.world.shakeCueterie();
@@ -175,6 +182,7 @@ class Collisions {
                     arr1.splice(i, 1);
                     this.p[0].score += arr2[j].scoreVal;
                     this.p[0].currentBullets--;
+                    this.world.spawner.spawnParticles(arr2[j], this.es);
                     arr2.splice(j, 1);
                     this.world.shakeCueterie();
                     //this.world.spawner.spawnEnemySaucer();
@@ -186,6 +194,7 @@ class Collisions {
                   if (arr1[i].owner == "Enemy") {
                     arr1.splice(i, 1);
                     if (arr2[0].canCollide == true) {
+                      this.world.spawner.spawnParticles(arr2[j], this.pl);
                       arr2[0].resetPlayerShip();
                       this.world.shakeCueterie();
                     }
@@ -197,10 +206,12 @@ class Collisions {
                 //Player
                 if (arr2 == this.p) {
                   arr2[j].score += arr1[i].scoreVal;
+                  this.world.spawner.spawnParticles(arr1[i], this.es);
                   arr1.splice(i, 1);
                   this.world.shakeCueterie();
                   //this.world.spawner.spawnEnemySaucer();
                   if (arr2[j].canCollide == true) {
+                    this.world.spawner.spawnParticles(arr2[j], this.pl);
                     arr2[j].resetPlayerShip();
                   }
                 }

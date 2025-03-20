@@ -105,7 +105,7 @@ class Spawner {
     }
   }
 
-  spawnParticles(objRef) {
+  spawnParticles(objRef, type) {
     for (let w = 0; w < this.numParticles; ++w) {
       this.sizerino = random(3, 6);
       this.randomX = random(-windowWidth, windowWidth);
@@ -115,6 +115,7 @@ class Spawner {
       this.spawnPos = objRef.position.copy();
       this.particle = new Particle(
         this.world,
+        type,
         this.spawnPos,
         this.randNorm,
         this.sizerino
