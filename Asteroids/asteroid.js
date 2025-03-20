@@ -8,7 +8,13 @@ class Asteroid {
     this.rad = this.size / 2;
     this.speedMult = this.base / (this.size * 2);
     this.velocity = createVector(0, 0);
-    this.scoreVal = 0;
+    if (this.sizeMult == 1) {
+      this.scoreVal = 20;
+    } else if (this.sizeMult == 2) {
+      this.scoreVal = 50;
+    } else if (this.sizeMult == 3) {
+      this.scoreVal = 100;
+    }
   }
 
   display() {
@@ -19,13 +25,7 @@ class Asteroid {
   }
 
   update() {
-    if (this.sizeMult == 1) {
-      this.scoreVal = 20;
-    } else if (this.sizeMult == 2) {
-      this.scoreVal = 50;
-    } else if (this.sizeMult == 3) {
-      this.scoreVal = 100;
-    }
+    
     this.velocity.x += cos(this.heading - HALF_PI) * this.speedMult;
     this.velocity.y += sin(this.heading - HALF_PI) * this.speedMult;
     this.wrapAround();

@@ -2,10 +2,13 @@ class Spawner {
   constructor(world) {
     this.world = world;
     this.asteroids = [];
-    this.startNum = 5;
+    this.startNum = 1;
     this.projectiles = [];
     this.saucers = [];
     this.players = [];
+    this.saucerCanSpawn = true;
+    this.saucerScoreInterval = 1200;
+    this.saucersSpawned = 0;
   }
 
   spawnAsteroids() {
@@ -67,7 +70,27 @@ class Spawner {
   }
 
   spawnEnemySaucer() {
-    this.saucer = new Saucer(50, 50, this.world, int(random(1, 3)));
+    if(this.saucerCanSpawn == true){
+    this.randomValue = random(0, 10)
+      if(this.randomValue <= 3){
+        this.sizeMult = 1
+      }
+      else{
+        this.sizeMult = 2
+      }
+    this.saucer = new Saucer(50, 50, this.world, this.sizeMult);
     this.saucers.push(this.saucer);
+    this.saucersSpawned++
+    this.saucerCanSpawn = false
+    }
+  }
+
+  //Find a better place to move saucer spawning/score logic
+
+  saucerSpawnInterval(){
+    if(this.players[0].score >= this.saucerScoreInterval * this.saucersSpawned){
+      this.saucerCanSpawn = true
+      this.spawnEnemySaucer()
+    }
   }
 }

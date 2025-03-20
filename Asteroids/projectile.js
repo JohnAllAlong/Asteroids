@@ -1,7 +1,7 @@
 class Projectile {
-  constructor(position, direction, speed, owner, lifetime, fillColor) {
+  constructor(position, target, speed, owner, lifetime, fillColor) {
     this.position = position.copy();
-    this.forceDirection = direction.copy();
+    this.target = target.copy();
     this.speedMult = speed;
     this.lifetime = lifetime;
     this.currentTime = 0;
@@ -10,6 +10,9 @@ class Projectile {
     this.rad = this.size / 2;
     this.owner = owner;
     this.fillColor = fillColor;
+    this.forceDirection = p5.Vector.sub(this.target, this.position)
+    this.normForceDirection = p5.Vector.normalize(this.forceDirection)
+    this.force = p5.Vector.mult(this.normForceDirection, this.speedMult);
   }
 
   display() {
@@ -22,7 +25,6 @@ class Projectile {
   }
 
   update() {
-    this.force = p5.Vector.mult(this.forceDirection, this.speedMult);
     this.wrapAround();
     this.position.add(this.force);
     this.currentTime += millis() / 1000 / frameCount;

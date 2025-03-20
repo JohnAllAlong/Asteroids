@@ -160,7 +160,7 @@ class Collisions {
                 else if(arr2 == this.s){
                   this.world.spawner.destroyAsteroid(i);
                   arr2.splice(j, 1);
-                  this.world.spawner.spawnEnemySaucer();
+                  //this.world.spawner.spawnEnemySaucer();
                   return;
                 }
               //Bullets vs.
@@ -173,7 +173,7 @@ class Collisions {
                     this.p[0].score += arr2[j].scoreVal
                     this.p[0].currentBullets--;
                     arr2.splice(j, 1);
-                    this.world.spawner.spawnEnemySaucer();
+                    //this.world.spawner.spawnEnemySaucer();
                     return;
                   }
                 }
@@ -193,7 +193,7 @@ class Collisions {
                 if(arr2 == this.p){
                   arr2[j].score += arr1[i].scoreVal;
                   arr1.splice(i, 1);
-                  this.world.spawner.spawnEnemySaucer();
+                  //this.world.spawner.spawnEnemySaucer();
                     if (arr2[j].canCollide == true) {
                       arr2[j].resetPlayerShip();
                     }

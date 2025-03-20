@@ -10,7 +10,7 @@
 
 let player;
 let world;
-let bulletSpeed = 40;
+let bulletSpeed = 5;
 let button;
 let reset;
 let gameStarted;
@@ -48,7 +48,8 @@ function draw() {
     world.update();
     world.display();
     detectInput();
-    console.log(player.currentBullets);
+    console.log("Target X: " + player.target.x);
+    console.log("Target Y: " + player.target.y);
   }
 }
 
@@ -78,16 +79,16 @@ function detectInput() {
       player.isEngineActive = false;
     }
     if (keyIsDown("32")) {
-      player.getBulletInfo();
       if (player.currentBullets < player.maxBullets && player.canFire) {
         world.spawner.spawnProjectile(
           player.position,
-          player.target,
+          player.direction,
           bulletSpeed,
           "Player",
           3,
           "green"
         );
+        player.getBulletInfo()
       }
       player.canFire = false;
     } else {

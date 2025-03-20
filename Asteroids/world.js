@@ -36,6 +36,7 @@ class World {
 
   update() {
     this.spawner.players[0].update();
+    this.spawner.saucerSpawnInterval();
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].update();
@@ -44,6 +45,9 @@ class World {
     if (this.spawner.projectiles.length != 0) {
       for (let k = 0; k < this.spawner.projectiles.length; ++k) {
         this.spawner.projectiles[k].update();
+        if(this.spawner.projectiles[k].isDead == true){
+          this.spawner.projectiles.splice(k, 1)
+        }
       }
     }
     if (this.spawner.saucers.length != 0) {
