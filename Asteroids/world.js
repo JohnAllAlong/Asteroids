@@ -21,6 +21,7 @@ class World {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
     this.spawner.spawnEnemySaucer();
+    this.createPlayButton()
   }
 
   display() {
@@ -51,6 +52,7 @@ class World {
   update() {
     this.spawner.players[0].update();
     this.spawner.saucerSpawnInterval();
+    this.playButton.mousePressed(this.playButtonPressed)
     if (this.spawner.particles.length != 0) {
       for (let q = 0; q < this.spawner.particles.length; ++q) {
         this.spawner.particles[q].update();
@@ -83,7 +85,6 @@ class World {
     this.cMatrix.genericCollisionCheck(this.s, this.p);
 
     this.spawner.destroyParticles();
-    //this.cMatrix.checkAsteroidsAndBullets();
   }
 
   shakeMe() {
@@ -101,6 +102,18 @@ class World {
   shakeCueterie() {
     this.countem = 0;
     //TO DO CHANGE ME AHHH SHOULD BE TRUE ONLY FALSE FOR TESTING
-    this.shakeCue = false;
+    this.shakeCue = true;
   }
+
+  createPlayButton(){
+    this.playButton = createButton("Play");
+    this.playButton.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
+  }
+
+  playButtonPressed() {
+    this.playButton.hide()
+    gameStarted = true;
+    this.sfx.bgMusic.loop()
+  }
+
 }

@@ -46,6 +46,7 @@ class PlayerShip {
 
   update() {
     this.updatePosition();
+    this.velMag = p5.Vector.mag(this.velocity)
     this.currentTime += millis() / 1000 / frameCount;
     if (this.currentTime >= this.invulnerableTimer) {
       this.canCollide = true;
@@ -60,6 +61,7 @@ class PlayerShip {
       this.earnedLives += 1;
       this.currentLives += 1;
     }
+    this.engineSounds()
   }
 
   drawShip() {
@@ -78,6 +80,29 @@ class PlayerShip {
     vertex(15, 10);
     endShape(CLOSE);
     pop();
+  }
+
+  engineSounds(){
+    if(this.isEngineActive){
+        this.world.sfx.engineOff.stop()
+        this.world.sfx.engineStopped = false;
+        if(!this.world.sfx.engineStart.isPlaying() && this.world.sfx.engineStarted == false){
+          this.world.sfx.engineStart.play()
+          this.world.sfx.engineStarted = true;
+        }
+      else if(this.velMag >= 0.1 && !this.world.sfx.engineOn.isPlaying() && !this.world.sfx.engineStart.isPlaying()){
+        this.world.sfx.engineOn.loop()
+      }
+      
+    }
+    else{
+      this.world.sfx.engineStart.stop()
+      this.world.sfx.engineStarted = false
+      this.world.sfx.engineOn.stop()
+      if(!this.world.sfx.engineOff.isPlaying() && this.world.sfx.engineStopped == false)
+      this.world.sfx.engineOff.play()
+      this.world.sfx.engineStopped = true;
+    }
   }
 
   updateRotation(input) {
@@ -131,6 +156,10 @@ class PlayerShip {
     this.angle = 0;
     this.canCollide = false;
     this.currentTime = 0;
+    this.world.sfx.engineStart.stop()
+    this.world.sfx.engineOn.stop()
+    this.world.sfx.engineOff.stop()
+    this.world.sfx.engineStarted = false
   }
 
   drawShield() {
