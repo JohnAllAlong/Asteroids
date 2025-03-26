@@ -17,7 +17,9 @@ let gameStarted;
 let particles = [];
 let particle;
 let bgMusic;
-let sfxEngine
+let sfxEngineStart
+let sfxEngineOn
+let sfxEngineOff
 let sfxShooting
 let sfxSaucer
 let sfxExplosion
@@ -26,7 +28,22 @@ let sfxTeleport
 function preload(){
   soundFormats('mp3', 'wav')
   bgMusic = loadSound('assets/abandoned-space-station-305773.mp3');
-  //sfxEngine = 
+  bgMusic.amp(0.2)
+  sfxEngineStart = loadSound('assets/M_Retro Turn ON Long.wav')
+  sfxEngineStart.amp(1)
+  sfxEngineOn = loadSound('assets/M_ON.wav')
+  sfxEngineOn.amp(1)
+  sfxEngineOff = loadSound('assets/M_Retro Turn Off 12.wav')
+  sfxEngineOff.amp(1)
+  sfxShooting = loadSound('assets/Retro Gun Laser SingleShot 01.wav')
+  sfxShooting.amp(1)
+  sfxSaucer = loadSound('assets/Retro HiTech 08.wav')
+  sfxSaucer.amp(1)
+  sfxExplosion = loadSound('assets/Retro Explosion Short 01.wav')
+  sfxExplosion.amp(1)
+  sfxTeleport = loadSound('assets/Retro PowerUP 23.wav')
+  sfxTeleport.amp(0.1)
+  
 }
 
 function setup() {
@@ -63,7 +80,9 @@ function draw() {
 
     world.update();
     world.display();
-    detectInput();
+    if (player != null){
+    player.detectInput();
+    }
     if (particles.length != 0) {
       for (let j = 0; j < particles.length; ++j) {
         particles[j].display();
@@ -90,7 +109,7 @@ function keyPressed() {
   }
 }
 
-function detectInput() {
+/*function detectInput() {
   if (player != null) {
     if (keyIsDown("65")) {
       player.updateRotation(-1);
@@ -120,7 +139,7 @@ function detectInput() {
       player.canFire = true;
     }
   }
-}
+}*/
 
 function titleScreen() {
   push();
@@ -151,17 +170,10 @@ function playButtonPressed() {
   button.hide();
 }
 
-//M3
 function resetGame() {
   window.location.reload();
 }
 
-/*function spawnyParty() {
-  let numParticles = 10;
-  for (let b = 0; b < numParticles; ++b) {
-    let randomVector = createVector(random(-1, 1), random(-1, 1));
-    let startMosPos = createVector(mouseX, mouseY);
-    particle = new Particle(world, startMosPos, randomVector, random(0.5, 2));
-    particles.push(particle);
-  }
-}*/
+function mouseClicked(){
+  console.log('clicky')
+}

@@ -12,6 +12,7 @@ class PlayerShip {
     this.isEngineActive = false;
     this.maxBullets = 5;
     this.currentBullets = 0;
+    this.bulletSpeed = 5
     this.colliderSize = 30;
     this.diameter = 40;
     this.rad = this.diameter / 2;
@@ -143,5 +144,36 @@ class PlayerShip {
       random(0, windowWidth),
       random(0, windowHeight)
     );
+  }
+
+  detectInput() {
+      if (keyIsDown("65")) {
+        this.updateRotation(-1);
+      }
+      if (keyIsDown("68")) {
+        this.updateRotation(1);
+      }
+      if (keyIsDown(UP_ARROW)) {
+        this.isEngineActive = true;
+      } else {
+        this.isEngineActive = false;
+      }
+      if (keyIsDown("32")) {
+        if (this.currentBullets < this.maxBullets && this.canFire) {
+          this.world.spawner.spawnProjectile(
+            this.position,
+            this.direction,
+            this.bulletSpeed,
+            "Player",
+            3,
+            "green"
+          );
+          this.getBulletInfo();
+        }
+        this.canFire = false;
+      } else {
+        this.canFire = true;
+      }
+    
   }
 }
