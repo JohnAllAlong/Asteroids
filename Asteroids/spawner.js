@@ -56,6 +56,7 @@ class Spawner {
       fillColor
     );
     this.projectiles.push(this.bullet);
+    this.world.sfx.shooting.play()
   }
 
   destroyProjectile() {
@@ -90,6 +91,7 @@ class Spawner {
       this.saucers.push(this.saucer);
       this.saucersSpawned++;
       this.saucerCanSpawn = false;
+      this.world.sfx.saucer.play()
     }
   }
 

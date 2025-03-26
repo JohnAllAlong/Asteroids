@@ -6,21 +6,21 @@ constructor(){
 
 initializeSFX(){
   this.bgMusic = loadSound('assets/abandoned-space-station-305773.mp3');
-  this.bgMusic.amp(0.2)
-  this.sfxEngineStart = loadSound('assets/M_Retro Turn ON Long.wav')
-  this.sfxEngineStart.amp(1)
-  this.sfxEngineOn = loadSound('assets/M_ON.wav')
-  this.sfxEngineOn.amp(1)
-  this.sfxEngineOff = loadSound('assets/M_Retro Turn Off 12.wav')
-  this.sfxEngineOff.amp(1)
-  this.sfxShooting = loadSound('assets/Retro Gun Laser SingleShot 01.wav')
-  this.sfxShooting.amp(1)
-  this.sfxSaucer = loadSound('assets/Retro HiTech 08.wav')
-  this.sfxSaucer.amp(1)
-  this.sfxExplosion = loadSound('assets/Retro Explosion Short 01.wav')
-  this.sfxExplosion.amp(1)
-  this.sfxTeleport = loadSound('assets/Retro PowerUP 23.wav')
-  this.sfxTeleport.amp(0.1)
+  this.bgMusic.amp(0.5)
+  this.engineStart = loadSound('assets/M_Retro Turn ON Long.wav')
+  this.engineStart.amp(1)
+  this.engineOn = loadSound('assets/M_ON.wav')
+  this.engineOn.amp(1)
+  this.engineOff = loadSound('assets/M_Retro Turn Off 12.wav')
+  this.engineOff.amp(1)
+  this.shooting = loadSound('assets/Retro Gun Laser SingleShot 01.wav')
+  this.shooting.amp(1)
+  this.saucer = loadSound('assets/Retro HiTech 08.wav')
+  this.saucer.amp(0.5)
+  this.explosion = loadSound('assets/Retro Explosion Short 01.wav')
+  this.explosion.amp(1)
+  this.teleport = loadSound('assets/Retro PowerUP 23.wav')
+  this.teleport.amp(0.1)
 }
 
 }

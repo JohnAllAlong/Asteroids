@@ -147,6 +147,7 @@ class Collisions {
                   this.world.spawner.spawnParticles(arr1[i], this.ast);
                   this.world.spawner.destroyAsteroid(i);
                   this.world.shakeCueterie();
+                  this.world.sfx.explosion.play()
                   if (this.p[j].canCollide == true) {
                     this.world.spawner.spawnParticles(arr2[j], this.pl);
                     this.p[j].resetPlayerShip();

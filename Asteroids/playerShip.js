@@ -27,6 +27,7 @@ class PlayerShip {
     //BONUS LIFE
     this.addLivesAtScore = 10000;
     this.world = world
+    this.canTeleport = false;
   }
 
   display() {
@@ -141,10 +142,14 @@ class PlayerShip {
   }
 
   teleport() {
+    if(this.canTeleport){
     this.position = createVector(
       random(0, windowWidth),
       random(0, windowHeight)
     );
+    this.currentTime = this.invulnerableTimer
+    this.world.sfx.teleport.play()
+  }
   }
 
   detectInput() {
@@ -153,6 +158,13 @@ class PlayerShip {
       }
       if (keyIsDown("68")) {
         this.updateRotation(1);
+      }
+      if(keyIsDown("84")){
+          this.teleport();
+          this.canTeleport = false
+      }
+      else{
+        this.canTeleport = true;
       }
       if (keyIsDown(UP_ARROW)) {
         this.isEngineActive = true;
