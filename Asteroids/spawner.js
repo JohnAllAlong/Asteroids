@@ -68,7 +68,7 @@ class Spawner {
   }
 
   spawnPlayerShip() {
-    this.player = new PlayerShip(windowWidth / 2, windowHeight / 2);
+    this.player = new PlayerShip(windowWidth / 2, windowHeight / 2, this.world);
     this.players.push(this.player);
   }
 

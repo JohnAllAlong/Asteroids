@@ -1,5 +1,5 @@
 class PlayerShip {
-  constructor(x, y) {
+  constructor(x, y, world) {
     this.x = x;
     this.y = y;
     this.rotationSpeed = 0.1;
@@ -26,6 +26,7 @@ class PlayerShip {
     this.score = 0;
     //BONUS LIFE
     this.addLivesAtScore = 10000;
+    this.world = world
   }
 
   display() {
