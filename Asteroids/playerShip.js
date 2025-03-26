@@ -20,7 +20,7 @@ class PlayerShip {
     this.fillColor = color(0, 100, 200, 150);
     this.invulnerableTimer = 2;
     this.currentTime = this.invulnerableTimer + 1;
-    this.startLives = 30;
+    this.startLives = 3;
     this.currentLives = this.startLives;
     this.earnedLives = 0;
     this.score = 0;
@@ -51,7 +51,7 @@ class PlayerShip {
     if (this.currentTime >= this.invulnerableTimer) {
       this.canCollide = true;
     }
-    if (this.currentLives < 0) {
+    if (this.currentLives <= 0) {
       this.currentLives = 0;
     }
     if (

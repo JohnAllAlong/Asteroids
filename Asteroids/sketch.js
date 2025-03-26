@@ -13,7 +13,6 @@
 let world;
 let button;
 let reset;
-let gameStarted;
 
 //Creating the instance of the world class first, then calling my custom preload function on the world which calls out to the sfx class and preloads the sfx and music.
 function preload(){
@@ -25,12 +24,6 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   world.start();
-  textSize(25);
-  noStroke();
-  gameStarted = false;
-  //button = createButton("Play");
-  //Arbitrary values. Change or break buttons off into own function?
-  //button.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
 }
 
 
@@ -38,17 +31,19 @@ function draw() {
   background(10);
 
   //If the game has not started, only show the title screen and don't run the rest of the draw function.
-  if (!gameStarted) {
-    titleScreen();
+  if (!world.gameStarted) {
+    world.ui.titleScreen();
     return;
   }
   //Could maybe set this to checking a bool on the player, but is that really any more performant?
   //I could set up a function on the world that gets called when the player has died, then this could be checking that world value instead but again, benefit?
-  if (world.spawner.players[0].currentLives <= 0) {
-    gameOverScreen();
+  if (world.spawner.players[0].isDead) {
+    world.ui.gameOverScreen();
   } else {
     //Displaying the player lives and score. Is this where I have to be more explicit about my fill and stroke so that it doesn't get weird.
     push();
+    textSize(25);
+    noStroke();
     fill("red");
     text("Player Lives: " + world.spawner.players[0].currentLives, 10, 50);
     fill("red");
@@ -75,34 +70,12 @@ function keyPressed() {
   }
 }
 
-//Creates a simple title screen with text. Registers the play button pressed to start the game.
-function titleScreen() {
-  push();
-  textAlign(CENTER, CENTER);
-  textSize(50);
-  fill("green");
-  text("ASTEROIDS", windowWidth / 2, windowHeight / 2 - 50);
-  world.playButton.mousePressed(world.playButtonPressed);
-  pop();
-}
-
-//Simple game over screen that creates a "reset" button
-function gameOverScreen() {
-  push();
-  textAlign(CENTER, CENTER);
-  textSize(50);
-  fill("blue");
-  text("GAME OVER", windowWidth / 2, windowHeight / 2 - 50);
-  reset = createButton("Reset");
-  reset.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
-  reset.mousePressed(resetGame);
-  pop();
-}
-
 function resetGame() {
   window.location.reload();
 }
 
-function mouseClicked(){
-  console.log('clicky')
+function mousePressed(){
+  console.log("CLICKY")
+  world.ui.buttonToPress(mouseX, mouseY)
+  console.log('DISU')
 }

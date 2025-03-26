@@ -7,10 +7,13 @@ class World {
     this.s = this.spawner.saucers;
     this.p = this.spawner.players;
     this.sfx = new SFX()
+    this.ui = new UI(this)
 
     this.shakeCue = false;
     this.countem = 0;
     this.shakeDuration = 0.1;
+    this.gameStarted = false;
+    this.gameOver = false;
   }
 
   preload(){
@@ -21,7 +24,6 @@ class World {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
     this.spawner.spawnEnemySaucer();
-    this.createPlayButton()
   }
 
   display() {
@@ -51,8 +53,10 @@ class World {
 
   update() {
     this.spawner.players[0].update();
+    if(this.spawner.players[0].currentLives <= 0){
+      this.gameOver = true;
+    }
     this.spawner.saucerSpawnInterval();
-    this.playButton.mousePressed(this.playButtonPressed)
     if (this.spawner.particles.length != 0) {
       for (let q = 0; q < this.spawner.particles.length; ++q) {
         this.spawner.particles[q].update();
@@ -105,15 +109,14 @@ class World {
     this.shakeCue = true;
   }
 
-  createPlayButton(){
-    this.playButton = createButton("Play");
-    this.playButton.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
-  }
-
   playButtonPressed() {
-    this.playButton.hide()
-    gameStarted = true;
+    this.gameStarted = true;
     this.sfx.bgMusic.loop()
   }
 
+  resetButtonPressed(){
+ 
+  }
+
+  
 }
