@@ -6,10 +6,15 @@ class World {
     this.b = this.spawner.projectiles;
     this.s = this.spawner.saucers;
     this.p = this.spawner.players;
-    this.knowledge = false;
+    this.sfx = new SFX()
+
     this.shakeCue = false;
     this.countem = 0;
     this.shakeDuration = 0.1;
+  }
+
+  preload(){
+    this.sfx.initializeSFX()
   }
 
   start() {

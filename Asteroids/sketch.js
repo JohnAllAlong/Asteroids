@@ -10,45 +10,18 @@
 
 let player;
 let world;
-let bulletSpeed = 5;
 let button;
 let reset;
 let gameStarted;
-let particles = [];
-let particle;
-let bgMusic;
-let sfxEngineStart
-let sfxEngineOn
-let sfxEngineOff
-let sfxShooting
-let sfxSaucer
-let sfxExplosion
-let sfxTeleport
+
 
 function preload(){
-  soundFormats('mp3', 'wav')
-  bgMusic = loadSound('assets/abandoned-space-station-305773.mp3');
-  bgMusic.amp(0.2)
-  sfxEngineStart = loadSound('assets/M_Retro Turn ON Long.wav')
-  sfxEngineStart.amp(1)
-  sfxEngineOn = loadSound('assets/M_ON.wav')
-  sfxEngineOn.amp(1)
-  sfxEngineOff = loadSound('assets/M_Retro Turn Off 12.wav')
-  sfxEngineOff.amp(1)
-  sfxShooting = loadSound('assets/Retro Gun Laser SingleShot 01.wav')
-  sfxShooting.amp(1)
-  sfxSaucer = loadSound('assets/Retro HiTech 08.wav')
-  sfxSaucer.amp(1)
-  sfxExplosion = loadSound('assets/Retro Explosion Short 01.wav')
-  sfxExplosion.amp(1)
-  sfxTeleport = loadSound('assets/Retro PowerUP 23.wav')
-  sfxTeleport.amp(0.1)
-  
+  world = new World();
+  world.preload()
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  world = new World();
   world.start();
   player = world.spawner.players[0];
   textSize(25);
@@ -82,12 +55,6 @@ function draw() {
     world.display();
     if (player != null){
     player.detectInput();
-    }
-    if (particles.length != 0) {
-      for (let j = 0; j < particles.length; ++j) {
-        particles[j].display();
-        particles[j].update();
-      }
     }
     if (world.spawner.particles.length != 0) {
       for (q = 0; q < world.spawner.particles.length; ++q) {
@@ -166,7 +133,7 @@ function gameOverScreen() {
 
 function playButtonPressed() {
   gameStarted = true;
-  bgMusic.loop()
+  world.sfx.bgMusic.loop()
   button.hide();
 }
 
