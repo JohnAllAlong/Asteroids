@@ -17,9 +17,16 @@ let gameStarted;
 let particles = [];
 let particle;
 let bgMusic;
+let sfxEngine
+let sfxShooting
+let sfxSaucer
+let sfxExplosion
+let sfxTeleport
 
 function preload(){
-  bgMusic = loadSound('/assets/abandoned-space-station-305773.mp3');
+  soundFormats('mp3', 'wav')
+  bgMusic = loadSound('assets/abandoned-space-station-305773.mp3');
+  //sfxEngine = 
 }
 
 function setup() {
@@ -32,7 +39,7 @@ function setup() {
   gameStarted = false;
   button = createButton("Play");
   button.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
-  //bgMusic.loop()
+  //bgMusic.play()
 }
 
 function draw() {
@@ -140,6 +147,7 @@ function gameOverScreen() {
 
 function playButtonPressed() {
   gameStarted = true;
+  bgMusic.loop()
   button.hide();
 }
 
@@ -147,10 +155,6 @@ function playButtonPressed() {
 function resetGame() {
   window.location.reload();
 }
-
-/*function mouseClicked() {
-  spawnyParty();
-}*/
 
 /*function spawnyParty() {
   let numParticles = 10;
