@@ -16,6 +16,11 @@ let reset;
 let gameStarted;
 let particles = [];
 let particle;
+let bgMusic;
+
+function preload(){
+  bgMusic = loadSound('/assets/abandoned-space-station-305773.mp3');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -27,6 +32,7 @@ function setup() {
   gameStarted = false;
   button = createButton("Play");
   button.position(windowWidth / 2 - 25, windowHeight / 2 + 50);
+  //bgMusic.loop()
 }
 
 function draw() {
