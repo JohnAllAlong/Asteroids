@@ -206,7 +206,7 @@ class PlayerShip {
             this.direction,
             this.bulletSpeed,
             "Player",
-            3,
+            2,
             "green"
           );
           this.getBulletInfo();
@@ -215,6 +215,5 @@ class PlayerShip {
       } else {
         this.canFire = true;
       }
-    
   }
 }

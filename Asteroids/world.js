@@ -18,6 +18,7 @@ class World {
 
   preload(){
     this.sfx.initializeSFX()
+    this.background = loadImage('assets/14960493_5532919.jpg')
   }
 
   start() {

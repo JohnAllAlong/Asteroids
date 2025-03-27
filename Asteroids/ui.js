@@ -9,7 +9,8 @@ class UI{
 
     titleScreen() {
         push();
-        noStroke()
+        stroke('white')
+        strokeWeight(2)
         textAlign(CENTER, CENTER);
         textSize(50);
         fill("green");
@@ -18,6 +19,7 @@ class UI{
         //Play Button
         fill("red")
         rect(this.buttonX, this.buttonY, this.buttonW, this.buttonH)
+        noStroke()
         fill('black')
         textSize(20)
         text("PLAY", this.buttonX, this.buttonY)
@@ -26,16 +28,18 @@ class UI{
 
       gameOverScreen(){
         push();
-        noStroke()
+        stroke('white')
+        strokeWeight(2)
         textAlign(CENTER, CENTER);
         textSize(50);
         fill("blue");
         text("GAME OVER", windowWidth / 2, windowHeight / 2 - 50);
         rectMode(CENTER)
         //Reset Button
-        fill("red")
+        fill("black")
         rect(this.buttonX, this.buttonY, this.buttonW, this.buttonH)
-        fill('black')
+        noStroke()
+        fill('red')
         textSize(20)
         text("RESET", this.buttonX, this.buttonY)
         pop();
@@ -44,20 +48,19 @@ class UI{
       inGameUI(){
         push();
     textSize(25);
-    noStroke();
-    fill("red");
-    text("Player Lives: " + world.spawner.players[0].currentLives, 10, 50);
-    fill("red");
+    stroke('black')
+    fill("white");
+    text("Player Lives: " + world.spawner.players[0].currentLives, 20, 50);
     text("Score: " + world.spawner.players[0].score, width - 150, 50);
     pop();
       }
 
       buttonToPress(xPos, yPos){
         if(xPos >= this.buttonX - this.buttonW / 2 && xPos <= this.buttonX + this.buttonW / 2 && yPos >= this.buttonY - this.buttonH / 2 && yPos <= this.buttonY + this.buttonH / 2){
-            if(!this.world.gameOver){
+            if(!this.world.gameOver && !this.world.gameStarted){
                 this.world.playButtonPressed()
             }
-            else{
+            else if(this.world.gameOver){
                 this.world.resetButtonPressed()
             }
           }

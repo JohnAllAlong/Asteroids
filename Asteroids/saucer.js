@@ -44,13 +44,6 @@ class Saucer {
     this.force = p5.Vector.mult(this.velocity, this.movementSpeed);
     this.wrapAround();
     this.position.add(this.force);
-    if (this.target != null) {
-      stroke("green");
-      if (this.player.score >= 5000) {
-        stroke("red");
-      }
-      line(this.position.x, this.position.y, this.target.x, this.target.y);
-    }
   }
 
   wrapAround() {

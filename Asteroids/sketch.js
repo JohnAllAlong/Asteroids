@@ -25,6 +25,7 @@ function setup() {
 
 function draw() {
   background(10);
+  image(world.background, 0, 0, windowWidth, windowHeight)
   //If the game has not started, only show the title screen and don't run the rest of the draw function.
   if (!world.gameStarted) {
     world.ui.titleScreen();
