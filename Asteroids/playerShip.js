@@ -93,7 +93,6 @@ class PlayerShip {
       else if(this.velMag >= 0.1 && !this.world.sfx.engineOn.isPlaying() && !this.world.sfx.engineStart.isPlaying()){
         this.world.sfx.engineOn.loop()
       }
-      
     }
     else{
       this.world.sfx.engineStart.stop()

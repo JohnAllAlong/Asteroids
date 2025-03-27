@@ -23,12 +23,13 @@ class World {
   start() {
     this.spawner.spawnAsteroids();
     this.spawner.spawnPlayerShip();
-    this.spawner.spawnEnemySaucer();
+    //this.spawner.spawnEnemySaucer();
   }
 
   display() {
     this.shakeMe();
     this.spawner.players[0].display();
+    this.ui.inGameUI()
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].display();
@@ -105,7 +106,6 @@ class World {
 
   shakeCueterie() {
     this.countem = 0;
-    //TO DO CHANGE ME AHHH SHOULD BE TRUE ONLY FALSE FOR TESTING
     this.shakeCue = true;
   }
 
@@ -115,8 +115,18 @@ class World {
   }
 
   resetButtonPressed(){
- 
+    window.location.reload();
   }
 
-  
+  gameOverState(){
+  this.ui.gameOverScreen()
+  this.sfx.bgMusic.stop()
+  this.sfx.engineStart.stop()
+  this.sfx.engineOn.stop()
+  this.sfx.engineOff.stop()
+  this.sfx.shooting.stop()
+  this.sfx.saucer.stop()
+  this.sfx.explosion.stop()
+  this.sfx.teleport.stop()
+  }
 }

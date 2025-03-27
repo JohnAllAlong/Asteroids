@@ -8,6 +8,7 @@ class Asteroid {
     this.rad = this.size / 2;
     this.speedMult = this.base / (this.size * 2);
     this.velocity = createVector(0, 0);
+    
     if (this.sizeMult == 1) {
       this.scoreVal = 20;
     } else if (this.sizeMult == 2) {

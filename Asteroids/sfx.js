@@ -2,7 +2,7 @@ class SFX{
 
 constructor(){
     this.engineStarted = false;
-    this.engineStopped = false;
+    this.engineStopped = true;
 }
 
 initializeSFX(){

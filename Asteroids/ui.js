@@ -9,6 +9,7 @@ class UI{
 
     titleScreen() {
         push();
+        noStroke()
         textAlign(CENTER, CENTER);
         textSize(50);
         fill("green");
@@ -25,12 +26,13 @@ class UI{
 
       gameOverScreen(){
         push();
+        noStroke()
         textAlign(CENTER, CENTER);
         textSize(50);
         fill("blue");
         text("GAME OVER", windowWidth / 2, windowHeight / 2 - 50);
         rectMode(CENTER)
-        //Play Button
+        //Reset Button
         fill("red")
         rect(this.buttonX, this.buttonY, this.buttonW, this.buttonH)
         fill('black')
@@ -40,7 +42,14 @@ class UI{
       }
 
       inGameUI(){
-
+        push();
+    textSize(25);
+    noStroke();
+    fill("red");
+    text("Player Lives: " + world.spawner.players[0].currentLives, 10, 50);
+    fill("red");
+    text("Score: " + world.spawner.players[0].score, width - 150, 50);
+    pop();
       }
 
       buttonToPress(xPos, yPos){
@@ -51,7 +60,6 @@ class UI{
             else{
                 this.world.resetButtonPressed()
             }
-
           }
       }
 }

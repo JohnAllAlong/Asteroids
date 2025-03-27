@@ -7,9 +7,9 @@ class Spawner {
     this.players = [];
     this.particles = [];
     this.saucerCanSpawn = true;
-    this.startNum = 1;
+    this.startNum = 5;
     this.saucerScoreInterval = 1200;
-    this.saucersSpawned = 0;
+    this.saucersSpawned = 1;
     this.numParticles = 30;
     this.particleDirection = createVector(0, 0);
   }
@@ -73,7 +73,6 @@ class Spawner {
     this.players.push(this.player);
   }
 
-  //M3
   spawnEnemySaucer() {
     if (this.saucerCanSpawn == true) {
       this.randomValue = random(0, 10);
@@ -95,8 +94,6 @@ class Spawner {
     }
   }
 
-  //Find a better place to move saucer spawning/score logic
-  //M3
   saucerSpawnInterval() {
     if (
       this.players[0].score >=

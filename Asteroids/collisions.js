@@ -163,6 +163,7 @@ class Collisions {
                   arr2.splice(j, 1);
                   this.world.spawner.destroyAsteroid(i);
                   this.world.shakeCueterie();
+                  this.world.sfx.explosion.play()
                   return;
                 }
                 //Saucers
@@ -172,7 +173,7 @@ class Collisions {
                   this.world.spawner.destroyAsteroid(i);
                   arr2.splice(j, 1);
                   this.world.shakeCueterie();
-                  //this.world.spawner.spawnEnemySaucer();
+                  this.world.sfx.explosion.play()
                   return;
                 }
                 //Bullets vs.
@@ -186,6 +187,7 @@ class Collisions {
                     this.world.spawner.spawnParticles(arr2[j], this.es);
                     arr2.splice(j, 1);
                     this.world.shakeCueterie();
+                    this.world.sfx.explosion.play()
                     //this.world.spawner.spawnEnemySaucer();
                     return;
                   }
@@ -194,6 +196,7 @@ class Collisions {
                 else if (arr2 == this.p) {
                   if (arr1[i].owner == "Enemy") {
                     arr1.splice(i, 1);
+                    this.world.sfx.explosion.play()
                     if (arr2[0].canCollide == true) {
                       this.world.spawner.spawnParticles(arr2[j], this.pl);
                       arr2[0].resetPlayerShip();
@@ -210,15 +213,13 @@ class Collisions {
                   this.world.spawner.spawnParticles(arr1[i], this.es);
                   arr1.splice(i, 1);
                   this.world.shakeCueterie();
-                  //this.world.spawner.spawnEnemySaucer();
+                  this.world.sfx.explosion.play()
                   if (arr2[j].canCollide == true) {
                     this.world.spawner.spawnParticles(arr2[j], this.pl);
                     arr2[j].resetPlayerShip();
                   }
                 }
-              } else {
-                dfieebfisdfjolkdsjlkf;
-              }
+              } 
             }
           }
         }
