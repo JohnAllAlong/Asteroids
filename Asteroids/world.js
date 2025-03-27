@@ -30,7 +30,7 @@ class World {
   display() {
     this.shakeMe();
     this.spawner.players[0].display();
-    this.ui.inGameUI()
+    
     if (this.spawner.asteroids.length != 0) {
       for (let j = 0; j < this.spawner.asteroids.length; ++j) {
         this.spawner.asteroids[j].display();
@@ -51,6 +51,7 @@ class World {
         this.spawner.particles[m].display();
       }
     }
+    this.ui.inGameUI()
   }
 
   update() {
